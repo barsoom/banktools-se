@@ -1,3 +1,4 @@
+require "spec_helper"
 require "banktools-se/utils"
 
 describe BankTools::SE::Utils, "valid_luhn?" do

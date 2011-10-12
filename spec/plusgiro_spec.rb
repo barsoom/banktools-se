@@ -1,3 +1,4 @@
+require "spec_helper"
 require "banktools-se"
 
 describe BankTools::SE::Plusgiro do

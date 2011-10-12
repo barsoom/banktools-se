@@ -8,6 +8,7 @@ Ruby gem to validate, normalize/prettify and to some extent interpret
 
 Inspired by [iulianu/iban-tools](https://github.com/iulianu/iban-tools). Please consider contributing gems for your country.
 
+
 ## Installation
 
 With Bundler for e.g. Ruby on Rails, add this to your `Gemfile`:
@@ -19,6 +20,7 @@ and run
     bundle
 
 to install it.
+
 
 ## Usage
 
@@ -55,15 +57,30 @@ to install it.
     fundraising_account = BankTools::SE::Plusgiro.new("90 20 03-3")
     fundraising_account.fundraising?  # => true
 
+
+    # Bank account
+
+    valid_account = BankTools::SE::Account.new("1100-0000000")
+    valid_account.valid?  # => true
+    valid_account.errors  # => []
+    valid_account.bank  # => "Nordea"
+    valid_account.normalize  # => "11000000007"
+
+    bad_account = BankTools::SE::Account.new(" 0000-0000000X ")
+    bad_account.valid?  # => false
+    bad_account.errors  # => [ :invalid_characters, :unknown_clearing_number ]
+    bad_account.bank  # => nil
+    bad_account.normalize  # => " 0000-0000000X "
+
+
 ## TODO
 
-This library is in development. The below is yet to be done.
+Possible improvements to make:
 
-    account = BankTools::SE::BankAccount.new("1234567890")
-    account.valid?  # => true, if it had been valid…
-    account.errors  # => [ :bad_checksum, :invalid_characters, :too_short, :too_long ], probably not all of these at once…
-    account.bank  # => "Swedbank", if it had been that…
-    account.normalize  # => "1234-567890", or something
+  * Handle [Swedbank zerofill](http://www.danskebank.se/sv-se/eBanking-content/text-pages/Pages/Bankliste2.aspx).
+  * Handle [Sparbanken zerofill](http://www.danskebank.se/sv-se/eBanking-content/text-pages/Pages/Bankliste2.aspx).
+  * Look into just what bank account numbers need Luhn validation of which part.
+
 
 ## Credits and license
 
