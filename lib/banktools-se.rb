@@ -2,6 +2,10 @@ require "banktools-se/version"
 
 module BankTools
   module SE
-    # Your code goes here...
+
+    def self.hello
+      "hello"
+    end
+
   end
 end
