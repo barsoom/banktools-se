@@ -22,19 +22,29 @@ to install it.
 
 ## Usage
 
-NOTE: This gem is currently in development, so the below is a wishlist, not a guarantee.
+    valid_account = BankTools::SE::Bankgiro.new(" 5402968 1 ")
+    valid_account.valid?  # => true
+    valid_account.validation_errors  # => []
+    valid_account.normalize  # => "5402-9681"
+
+    bad_account = BankTools::SE::Bankgiro.new(" 1X ")
+    bad_account.valid?  # => false
+    bad_account.errors  # => [ :too_short, :invalid_characters, :bad_checksum ]
+    bad_account.normalize  # => " 1 "
+
+## TODO
+
+This library is in development. The below is yet do be done.
 
     account = BankTools::SE::BankAccount.new("1234567890")
     account.valid?  # => true, if it had been valid…
+    account.errors  # => [ :bad_checksum, :invalid_characters, :too_short, :too_long ], probably not all of these at once…
     account.bank  # => "Swedbank", if it had been that…
     account.normalize  # => "1234-567890", or something
 
     account = BankTools::SE::Plusgiro.new("1234567890")
     account.valid?  # => true, if it had been valid…
-    account.normalize  # => "1234-567890", or something
-
-    account = BankTools::SE::Bankgiro.new("1234567890")
-    account.valid?  # => true, if it had been valid…
+    account.errors  # => [ :bad_checksum, :invalid_characters, :too_short, :too_long ], probably not all of these at once…
     account.normalize  # => "1234-567890", or something
 
 ## Credits and license
