@@ -6,6 +6,8 @@ Ruby gem to validate, normalize/prettify and to some extent interpret
   * Swedish plusgiro numbers
   * Swedish bankgiro numbers
 
+This gem does what it can to weed out invalid numbers but errs on the side of allowing too much, in the absence of good specifications, so be advised that a "valid" number might still be incorrect.
+
 Inspired by [iulianu/iban-tools](https://github.com/iulianu/iban-tools). Please consider contributing gems for your country.
 
 
