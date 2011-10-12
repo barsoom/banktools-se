@@ -26,7 +26,7 @@ to install it.
 
     valid_account = BankTools::SE::Bankgiro.new(" 5402968 1 ")
     valid_account.valid?  # => true
-    valid_account.validation_errors  # => []
+    valid_account.errors  # => []
     valid_account.normalize  # => "5402-9681"
 
     bad_account = BankTools::SE::Bankgiro.new(" 1X ")
@@ -43,7 +43,7 @@ to install it.
 
     valid_account = BankTools::SE::Plusgiro.new("2865434")
     valid_account.valid?  # => true
-    valid_account.validation_errors  # => []
+    valid_account.errors  # => []
     valid_account.normalize  # => "28 65 53-4"
 
     bad_account = BankTools::SE::Plusgiro.new(" 1X ")
