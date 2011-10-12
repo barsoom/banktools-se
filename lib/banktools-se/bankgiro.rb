@@ -33,10 +33,14 @@ module BankTools
         end
       end
 
+      def fundraising?
+        valid? && number.match(/^90[0-4]/)
+      end
+
       private
 
       def digits
-        @number.to_s.gsub(/\D/, '')
+        number.to_s.gsub(/\D/, '')
       end
 
     end

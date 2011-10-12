@@ -75,4 +75,20 @@ describe BankTools::SE::Bankgiro do
 
   end
 
+  describe "#fundraising? (90-konto)" do
+
+    it "should be true for the number series 900-nnnn to 904-nnnn" do
+      BankTools::SE::Bankgiro.new("902-0033").should be_fundraising
+    end
+
+    it "should be false for invalid numbers in the right series" do
+      BankTools::SE::Bankgiro.new("902-0034").should_not be_fundraising
+    end
+
+    it "should be false for numbers outside the right series" do
+      BankTools::SE::Bankgiro.new("5402-9681").should_not be_fundraising
+    end
+
+  end
+
 end

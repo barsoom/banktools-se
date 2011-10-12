@@ -32,6 +32,10 @@ to install it.
     bad_account.errors  # => [ :too_short, :invalid_characters, :bad_checksum ]
     bad_account.normalize  # => " 1 "
 
+    # 90-konto
+    fundraising_account = BankTools::SE::Bankgiro.new("902-0033")
+    fundraising_account.fundraising?  # => true
+
 ## TODO
 
 This library is in development. The below is yet to be done.
