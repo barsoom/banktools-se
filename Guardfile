@@ -4,4 +4,3 @@ guard 'rspec', :version => 2, :cli => "--color" do
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec" }
   watch('spec/spec_helper.rb')  { "spec" }
 end
-
