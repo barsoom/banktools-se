@@ -1,6 +1,6 @@
 module Bank
   module Tools
-    module Se
+    module SE
       VERSION = "0.0.1"
     end
   end

@@ -2,7 +2,7 @@ require "bank-tools-se/version"
 
 module Bank
   module Tools
-    module Se
+    module SE
       # Your code goes here...
     end
   end

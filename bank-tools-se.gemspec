@@ -4,12 +4,12 @@ require "bank-tools-se/version"
 
 Gem::Specification.new do |s|
   s.name        = "bank-tools-se"
-  s.version     = Bank::Tools::Se::VERSION
-  s.authors     = ["Henrik N"]
-  s.email       = ["henrik@nyh.se"]
+  s.version     = Bank::Tools::SE::VERSION
+  s.authors     = ["Henrik Nyh"]
+  s.email       = ["henrik@barsoom.se"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{Validate and prettify Swedish bank account numbers, plusgiro and bankgiro.}
+  s.description = %q{Validate and prettify Swedish bank account numbers, plusgiro and bankgiro.}
 
   s.rubyforge_project = "bank-tools-se"
 
