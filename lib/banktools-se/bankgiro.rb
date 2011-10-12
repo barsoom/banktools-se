@@ -2,6 +2,8 @@ module BankTools
   module SE
     class Bankgiro
 
+      # http://sv.wikipedia.org/wiki/Bankgirot#Bankgironummer
+
       attr_reader :number
 
       def initialize(number)

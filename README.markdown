@@ -1,6 +1,6 @@
 # Swedish bank tools
 
-Ruby gem to validate, prettify/normalize and to some extent interpret
+Ruby gem to validate, normalize/prettify and to some extent interpret
 
   * Swedish bank account numbers
   * Swedish plusgiro numbers
@@ -34,7 +34,7 @@ to install it.
 
 ## TODO
 
-This library is in development. The below is yet do be done.
+This library is in development. The below is yet to be done.
 
     account = BankTools::SE::BankAccount.new("1234567890")
     account.valid?  # => true, if it had been valid…
