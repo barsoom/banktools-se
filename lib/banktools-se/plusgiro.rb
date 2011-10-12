@@ -1,8 +1,9 @@
 module BankTools
   module SE
-    class Bankgiro
+    class Plusgiro
 
-      # http://sv.wikipedia.org/wiki/Bankgirot#Bankgironummer
+      # Could sadly not find anything more authoritative than
+      #   http://pellesoft.se/communicate/forum/view.aspx?msgid=267449&forumid=63&sum=0
 
       attr_reader :number
 
@@ -17,7 +18,7 @@ module BankTools
       def errors
         errors = []
 
-        errors << :too_short if digits.length < 7
+        errors << :too_short if digits.length < 2
         errors << :too_long if digits.length > 8
         errors << :invalid_characters if number.to_s.match(/[^0-9 -]/)
         errors << :bad_checksum unless BankTools::SE::Utils.valid_luhn?(number)
@@ -27,14 +28,18 @@ module BankTools
 
       def normalize
         if valid?
-          digits.split(/(\d{4})$/).join("-")
+          pre, pairs, post = digits.split(/(\d{2}*)(\d)$/)
+          pairs = pairs.split(/(\d\d)/).reject { |x| x.empty? }
+          [ pre, pairs.join(" "), "-", post ].join
         else
           number
         end
       end
 
+      # http://www.plusgirot.se/Om+PlusGirot/90-konton/508552.html
+      # http://www.insamlingskontroll.se/
       def fundraising?
-        valid? && digits.match(/^90[0-4]/)
+        valid? && digits.match(/^90\d{5}$/)
       end
 
       private
