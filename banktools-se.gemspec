@@ -8,8 +8,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Henrik Nyh"]
   s.email       = ["henrik@barsoom.se"]
   s.homepage    = ""
-  s.summary     = %q{Validate and prettify Swedish bank account numbers, plusgiro and bankgiro.}
-  s.description = %q{Validate and prettify Swedish bank account numbers, plusgiro and bankgiro.}
+  s.summary     = %q{Validate and normalize Swedish bank account numbers, plusgiro and bankgiro.}
 
   s.rubyforge_project = "banktools-se"
 
