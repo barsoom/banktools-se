@@ -79,15 +79,15 @@ module BankTools
       def errors
         errors = []
 
-        errors << :too_short if serial_number.length < min_length
-        errors << :too_long if serial_number.length > max_length
-        errors << :invalid_characters if number.to_s.match(/[^0-9 -]/)
+        errors << Errors::TOO_SHORT if serial_number.length < min_length
+        errors << Errors::TOO_LONG if serial_number.length > max_length
+        errors << Errors::INVALID_CHARACTERS if number.to_s.match(/[^0-9 -]/)
 
         if luhn_for_serial?
-          errors << :bad_checksum unless BankTools::SE::Utils.valid_luhn?(serial_number)
+          errors << Errors::BAD_CHECKSUM unless BankTools::SE::Utils.valid_luhn?(serial_number)
         end
 
-        errors << :unknown_clearing_number unless bank
+        errors << Errors::UNKNOWN_CLEARING_NUMBER unless bank
 
         errors
       end

@@ -75,6 +75,14 @@ to install it.
     bad_account.normalize  # => " 0000-0000000X "
 
 
+    # Error codes
+    BankTools::SE::Errors::TOO_SHORT                # => :too_short
+    BankTools::SE::Errors::TOO_LONG                 # => :too_long
+    BankTools::SE::Errors::INVALID_CHARACTERS       # => :invalid_characters
+    BankTools::SE::Errors::BAD_CHECKSUM             # => :bad_checksum
+    BankTools::SE::Errors::UNKNOWN_CLEARING_NUMBER  # => :unknown_clearing_number
+
+
 ## TODO
 
 Possible improvements to make:

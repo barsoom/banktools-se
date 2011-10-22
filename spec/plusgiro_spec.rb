@@ -35,23 +35,23 @@ describe BankTools::SE::Plusgiro do
     end
 
     it "should include :too_short for numbers shorter than 2 digits" do
-      BankTools::SE::Plusgiro.new(nil).errors.should include(:too_short)
-      BankTools::SE::Plusgiro.new("").errors.should include(:too_short)
-      BankTools::SE::Plusgiro.new("1").errors.should include(:too_short)
-      BankTools::SE::Plusgiro.new("1---------").errors.should include(:too_short)
+      BankTools::SE::Plusgiro.new(nil).errors.should include(BankTools::SE::Errors::TOO_SHORT)
+      BankTools::SE::Plusgiro.new("").errors.should include(BankTools::SE::Errors::TOO_SHORT)
+      BankTools::SE::Plusgiro.new("1").errors.should include(BankTools::SE::Errors::TOO_SHORT)
+      BankTools::SE::Plusgiro.new("1---------").errors.should include(BankTools::SE::Errors::TOO_SHORT)
     end
 
     it "should include :too_long for numbers longer than 8 digits" do
-      BankTools::SE::Plusgiro.new("410 54 68-51").errors.should include(:too_long)
+      BankTools::SE::Plusgiro.new("410 54 68-51").errors.should include(BankTools::SE::Errors::TOO_LONG)
     end
 
     it "should include :invalid_characters for numbers with other character than digits, spaces and dashes" do
-      BankTools::SE::Plusgiro.new("410 54 68-5X").errors.should include(:invalid_characters)
-      BankTools::SE::Plusgiro.new("4 1 0 5 4 6 8 - 5 ").errors.should_not include(:invalid_characters)
+      BankTools::SE::Plusgiro.new("410 54 68-5X").errors.should include(BankTools::SE::Errors::INVALID_CHARACTERS)
+      BankTools::SE::Plusgiro.new("4 1 0 5 4 6 8 - 5 ").errors.should_not include(BankTools::SE::Errors::INVALID_CHARACTERS)
     end
 
     it "should include :bad_checksum if the Luhn/mod 10 checksum is incorrect" do
-      BankTools::SE::Plusgiro.new("410 54 68-6").errors.should include(:bad_checksum)
+      BankTools::SE::Plusgiro.new("410 54 68-6").errors.should include(BankTools::SE::Errors::BAD_CHECKSUM)
     end
 
   end

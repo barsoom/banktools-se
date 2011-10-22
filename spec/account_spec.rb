@@ -87,31 +87,31 @@ describe BankTools::SE::Account do
     end
 
     it "should include :too_short for numbers shorter than the bank allows" do
-      BankTools::SE::Account.new("11007").errors.should include(:too_short)
+      BankTools::SE::Account.new("11007").errors.should include(BankTools::SE::Errors::TOO_SHORT)
     end
 
     it "should include :too_long for numbers longer than the bank allows" do
-      BankTools::SE::Account.new("1100000000007").errors.should include(:too_long)
+      BankTools::SE::Account.new("1100000000007").errors.should include(BankTools::SE::Errors::TOO_LONG)
     end
 
     it "should not include :too_long for Swedbank/Sparbanker numbers with clearing checksum" do
-      BankTools::SE::Account.new("8000-2-0000000000").errors.should_not include(:too_long)
+      BankTools::SE::Account.new("8000-2-0000000000").errors.should_not include(BankTools::SE::Errors::TOO_LONG)
     end
 
     it "should include :invalid_characters for numbers with other character than digits, spaces and dashes" do
-      BankTools::SE::Account.new("1 2-3X").errors.should include(:invalid_characters)
-      BankTools::SE::Account.new("1 2-3").errors.should_not include(:invalid_characters)
+      BankTools::SE::Account.new("1 2-3X").errors.should include(BankTools::SE::Errors::INVALID_CHARACTERS)
+      BankTools::SE::Account.new("1 2-3").errors.should_not include(BankTools::SE::Errors::INVALID_CHARACTERS)
     end
 
     it "should include :bad_checksum for Nordea personkonto if the serial Luhn/mod 10 checksum is incorrect" do
       BankTools::SE::Utils.valid_luhn?("800928-6249").should be_true
       BankTools::SE::Utils.valid_luhn?("3300-800928-6249").should be_false
-      BankTools::SE::Account.new("3300-800928-6249").errors.should_not include(:bad_checksum)
+      BankTools::SE::Account.new("3300-800928-6249").errors.should_not include(BankTools::SE::Errors::BAD_CHECKSUM)
     end
 
     it "should include :unknown_clearing_number if the clearing number is unknown" do
-      BankTools::SE::Account.new("10000000009").errors.should include(:unknown_clearing_number)
-      BankTools::SE::Account.new("11000000007").errors.should_not include(:unknown_clearing_number)
+      BankTools::SE::Account.new("10000000009").errors.should include(BankTools::SE::Errors::UNKNOWN_CLEARING_NUMBER)
+      BankTools::SE::Account.new("11000000007").errors.should_not include(BankTools::SE::Errors::UNKNOWN_CLEARING_NUMBER)
     end
 
   end
