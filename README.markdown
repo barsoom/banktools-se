@@ -62,7 +62,7 @@ to install it.
 
     # Bank account
 
-    valid_account = BankTools::SE::Account.new("1100-0000000")
+    valid_account = BankTools::SE::Account.new("11000000000")
     valid_account.valid?  # => true
     valid_account.errors  # => []
     valid_account.bank  # => "Nordea"
