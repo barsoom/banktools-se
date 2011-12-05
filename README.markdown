@@ -66,7 +66,7 @@ to install it.
     valid_account.valid?  # => true
     valid_account.errors  # => []
     valid_account.bank  # => "Nordea"
-    valid_account.normalize  # => "11000000007"
+    valid_account.normalize  # => "1100-0000000"
 
     bad_account = BankTools::SE::Account.new(" 0000-0000000X ")
     bad_account.valid?  # => false
@@ -76,6 +76,7 @@ to install it.
 
 
     # Error codes
+
     BankTools::SE::Errors::TOO_SHORT                # => :too_short
     BankTools::SE::Errors::TOO_LONG                 # => :too_long
     BankTools::SE::Errors::INVALID_CHARACTERS       # => :invalid_characters
