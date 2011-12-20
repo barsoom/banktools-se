@@ -90,6 +90,7 @@ Possible improvements to make:
 
   * Handle [Swedbank zerofill](http://www.danskebank.se/sv-se/eBanking-content/text-pages/Pages/Bankliste2.aspx).
   * Handle [Sparbanken zerofill](http://www.danskebank.se/sv-se/eBanking-content/text-pages/Pages/Bankliste2.aspx).
+  * Have a look at the [BGC docs](http://www.bgc.se/upload/Gemensamt/Trycksaker/Manualer/BG910.pdf) for validation rules and another output format
   * Look into just what bank account numbers need Luhn validation of which part.
 
 
@@ -116,4 +117,3 @@ By [Henrik Nyh](http://henrik.nyh.se/) for [Barsoom](http://barsoom.se) under th
 >  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 >  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 >  THE SOFTWARE.
-
