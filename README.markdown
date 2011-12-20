@@ -65,8 +65,10 @@ to install it.
     valid_account = BankTools::SE::Account.new("11000000000")
     valid_account.valid?  # => true
     valid_account.errors  # => []
-    valid_account.bank  # => "Nordea"
     valid_account.normalize  # => "1100-0000000"
+    valid_account.bank  # => "Nordea"
+    valid_account.clearing_number  # => "1100"
+    valid_account.serial_number  # => "0000000"
 
     bad_account = BankTools::SE::Account.new(" 0000-0000000X ")
     bad_account.valid?  # => false
