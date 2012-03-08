@@ -34,6 +34,7 @@ module BankTools
         7000..7120 => { :name => "Swedbank" },
         7121..7122 => { :name => "Sparbanken i Enköping", :serial_number_length => 7..10 },  # 7? 10? Who knows.
         7123..7999 => { :name => "Swedbank" },
+        # Always 5 + 10. Shorter serial numbers should be zerofilled from the left.
         8000..8999 => { :name => "Swedbank och fristående Sparbanker", :serial_number_length => 10, :checksum_for_clearing => true },
         9020..9029 => { :name => "Länsförsäkringar Bank" },
         9040..9049 => { :name => "Citibank" },
@@ -104,22 +105,24 @@ module BankTools
       end
 
       def clearing_number
-        digits[0,4]
+        [
+          digits[0,4],
+          checksum_for_clearing? ? digits[4,1] : nil
+        ].compact.join("-")
       end
 
       def serial_number
-        value = digits[4..-1] || ""
-        if checksum_for_clearing? && value.length == max_length
-          value[1..-1]
-        else
-          value
-        end
+        digits.slice(clearing_number_length..-1) || ""
       end
 
       private
 
+      def clearing_number_length
+        checksum_for_clearing? ? 5 : 4
+      end
+
       def bank_data
-        number = clearing_number.to_i
+        number = digits[0,4].to_i
         _, found_data = CLEARING_NUMBER_MAP.find do |interval, data|
           interval.include?(number)
         end

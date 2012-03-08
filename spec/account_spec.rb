@@ -48,7 +48,6 @@ describe BankTools::SE::Account do
       "7000-0000000",       # Swedbank.
       "7121-0000000",       # Sparbanken i Enköping.
       "7123-0000000",       # Swedbank.
-      "8000-0000000000",    # Swedbank/Sparbanker.
       "8000-2-0000000000",  # Swedbank/Sparbanker with clearing number checksum.
       "9020-0000000",       # Länsförsäkringar Bank.
       "9040-0000000",       # Citibank.
@@ -137,6 +136,10 @@ describe BankTools::SE::Account do
       BankTools::SE::Account.new("12345678").clearing_number.should == "1234"
     end
 
+    it "should be the first five digits if there is a clearing number checksum" do
+      BankTools::SE::Account.new("8000-2-0000000000").clearing_number.should == "8000-2"
+    end
+
   end
 
   describe "#serial_number" do
@@ -145,13 +148,12 @@ describe BankTools::SE::Account do
       BankTools::SE::Account.new("12345678").serial_number.should == "5678"
     end
 
-    it "should be the empty string if there aren't enough numbers" do
-      BankTools::SE::Account.new("12").serial_number.should == ""
+    it "should be the digits after the first five digits if there is a clearing number checksum" do
+      BankTools::SE::Account.new("8000-2-0000000000").serial_number.should == "0000000000"
     end
 
-    it "should exclude any Swedbank/Sparbanker clearing checksum" do
-      BankTools::SE::Account.new("8000-2-0000000000").serial_number.should == "0000000000"
-      BankTools::SE::Account.new("8000-0000000000").serial_number.should == "0000000000"
+    it "should be the empty string if there aren't enough numbers" do
+      BankTools::SE::Account.new("12").serial_number.should == ""
     end
 
   end
@@ -162,9 +164,8 @@ describe BankTools::SE::Account do
       account = BankTools::SE::Account.new("11000000007").normalize.should == "1100-0000007"
     end
 
-    it "should remove any Swedbank/Sparbanker clearing checksum" do
-      BankTools::SE::Account.new("8000-2-0000000000").normalize.should == "8000-0000000000"
-      BankTools::SE::Account.new("8000-0000000000").normalize.should == "8000-0000000000"
+    it "should keep any Swedbank/Sparbanker clearing checksum" do
+      BankTools::SE::Account.new("8000-2-0000000000").normalize.should == "8000-2-0000000000"
     end
 
     it "should not attempt to normalize invalid numbers" do
