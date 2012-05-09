@@ -63,6 +63,7 @@ module BankTools
         9548..9548 => { :name => "Ekobanken", :serial_number_length => 1..99 },
         9549..9549 => { :name => "JAK Medlemsbank", :serial_number_length => 1..99 },
         9550..9550 => { :name => "Avanza Bank" },
+        9570..9579 => { :name => "Sparbanken Syd", :serial_number_length => 10 },
         9960..9969 => { :name => "Plusgirot Bank", :serial_number_length => 10 },
       }
 

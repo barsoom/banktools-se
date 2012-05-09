@@ -77,6 +77,7 @@ describe BankTools::SE::Account do
       "9548-00",            # Ekobanken.
       "9549-00",            # JAK Medlemsbank.
       "9550-0000000",       # Avanza Bank.
+      "9570-0000000000",    # Sparbanken Syd.
       "9960-0000000000",    # Plusgirot Bank.
 
     ].each do |number|
