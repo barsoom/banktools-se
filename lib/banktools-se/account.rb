@@ -4,13 +4,7 @@ module BankTools
   module SE
     class Account
 
-      # http://sv.wikipedia.org/wiki/Lista_%C3%B6ver_clearingnummer_till_svenska_banker
-      # Max lengths from
-      #   http://www.danskebank.se/sv-se/eBanking-content/text-pages/Pages/Bankliste2.aspx
-      # Min lengths are educated guesses based on the above and
-      #   http://sv.wikipedia.org/wiki/Bankkonto
-      # When it's uncertain, let's error on the side of allowing too much.
-      # 1..99 means we have no idea.
+      # http://www.bgc.se/upload/Gemensamt/Trycksaker/Manualer/BG910.pdf
 
       DEFAULT_SERIAL_NUMBER_LENGTH = 7
 
@@ -18,10 +12,8 @@ module BankTools
         1100..1199 => { :name => "Nordea" },
         1200..1399 => { :name => "Danske Bank" },
         1400..2099 => { :name => "Nordea" },
-        2300..2309 => { :name => "JP Nordiska", :serial_number_length => 1..99 },
-        2310..2310 => { :name => "Ålandsbanken" },
-        2311..2399 => { :name => "JP Nordiska", :serial_number_length => 1..99 },
-        2950..2950 => { :name => "Sambox", :serial_number_length => 1..99 },
+        2300..2399 => { :name => "Ålandsbanken" },
+        2400..2499 => { :name => "Danske Bank" },
         3000..3299 => { :name => "Nordea" },
         3300..3300 => { :name => "Nordea", :serial_number_length => 10, :luhn_for_serial => true },  # Personkonto.
         3301..3399 => { :name => "Nordea" },
@@ -31,40 +23,33 @@ module BankTools
         3783..4999 => { :name => "Nordea" },
         5000..5999 => { :name => "SEB" },
         6000..6999 => { :name => "Handelsbanken", :serial_number_length => 9 },
-        7000..7120 => { :name => "Swedbank" },
-        7121..7122 => { :name => "Sparbanken i Enköping", :serial_number_length => 7..10 },  # 7? 10? Who knows.
-        7123..7999 => { :name => "Swedbank" },
-        # Always 5 + 10. Shorter serial numbers should be zerofilled from the left.
-        8000..8999 => { :name => "Swedbank och fristående Sparbanker", :serial_number_length => 10, :checksum_for_clearing => true },
+        7000..7999 => { :name => "Swedbank" },
+        # Can be fewer chars but must be zero-filled, so let's call it 10.
+        8000..8999 => { :name => "Swedbank", :serial_number_length => 10, :checksum_for_clearing => true },
         9020..9029 => { :name => "Länsförsäkringar Bank" },
         9040..9049 => { :name => "Citibank" },
-        9050..9059 => { :name => "HSB Bank", :serial_number_length => 1..99 },
         9060..9069 => { :name => "Länsförsäkringar Bank" },
-        9080..9080 => { :name => "Calyon Bank", :serial_number_length => 1..99 },
-        9090..9099 => { :name => "ABN AMRO", :serial_number_length => 1..99 },
-        9100..9100 => { :name => "Nordnet Bank" },
+        9090..9099 => { :name => "Royal Bank of Scotland" },
+        9100..9109 => { :name => "Nordnet Bank" },
         9120..9124 => { :name => "SEB" },
         9130..9149 => { :name => "SEB" },
         9150..9169 => { :name => "Skandiabanken" },
         9170..9179 => { :name => "Ikano Bank" },
-        9180..9189 => { :name => "Danske Bank" },
+        9180..9189 => { :name => "Danske Bank", :serial_number_length => 10 },
         9190..9199 => { :name => "Den Norske Bank" },
-        9200..9209 => { :name => "Stadshypotek Bank", :serial_number_length => 1..99 },
-        9230..9230 => { :name => "Bank2" },
-        9231..9239 => { :name => "SalusAnsvar Bank", :serial_number_length => 1..99 },
-        9260..9269 => { :name => "Gjensidige NOR Sparebank", :serial_number_length => 1..99 },
+        9230..9239 => { :name => "Marginalen Bank" },
+        9250..9259 => { :name => "SBAB" },
+        9260..9269 => { :name => "Den Norske Bank" },
         9270..9279 => { :name => "ICA Banken" },
         9280..9289 => { :name => "Resurs Bank" },
-        9290..9299 => { :name => "Coop Bank", :serial_number_length => 1..99 },
         9300..9349 => { :name => "Sparbanken Öresund", :serial_number_length => 10 },
         9400..9449 => { :name => "Forex Bank" },
         9460..9469 => { :name => "GE Money Bank" },
-        9500..9547 => { :name => "Plusgirot Bank", :serial_number_length => 10 },
-        9548..9548 => { :name => "Ekobanken", :serial_number_length => 1..99 },
-        9549..9549 => { :name => "JAK Medlemsbank", :serial_number_length => 1..99 },
-        9550..9550 => { :name => "Avanza Bank" },
+        9470..9479 => { :name => "Fortis Bank" },
+        9500..9549 => { :name => "Nordea/Plusgirot", :serial_number_length => 1..10 },
+        9550..9569 => { :name => "Avanza Bank" },
         9570..9579 => { :name => "Sparbanken Syd", :serial_number_length => 10 },
-        9960..9969 => { :name => "Plusgirot Bank", :serial_number_length => 10 },
+        9960..9969 => { :name => "Nordea/Plusgirot", :serial_number_length => 1..10 },
       }
 
       attr_reader :number

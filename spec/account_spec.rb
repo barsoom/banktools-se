@@ -28,14 +28,10 @@ describe BankTools::SE::Account do
   describe "#errors" do
     [
       "1100-0000000",       # Nordea.
-      "1155-0000000",       # Nordea.
-      "1199-0000000",       # Nordea.
       "1200-0000000",       # Danske Bank.
       "1400-0000000",       # Nordea.
-      "2300-00",            # JP Nordiska.
-      "2310-0000000",       # Ålandsbanken.
-      "2311-00",            # JP Nordiska.
-      "2950-00",            # Sambox.
+      "2300-0000000",       # Ålandsbanken.
+      "2400-0000000",       # Danske Bank.
       "3000-0000000",       # Nordea.
       "3300-800928-6249",   # Nordea personkonto.
       "3301-0000000",       # Nordea.
@@ -46,39 +42,31 @@ describe BankTools::SE::Account do
       "5000-0000000",       # SEB.
       "6000-000000000",     # Handelsbanken.
       "7000-0000000",       # Swedbank.
-      "7121-0000000",       # Sparbanken i Enköping.
-      "7123-0000000",       # Swedbank.
       "8000-2-0000000000",  # Swedbank/Sparbanker with clearing number checksum.
       "9020-0000000",       # Länsförsäkringar Bank.
       "9040-0000000",       # Citibank.
-      "9050-00",            # HSB Bank.
       "9060-0000000",       # Länsförsäkringar Bank.
-      "9080-00",            # Calyon Bank.
-      "9090-00",            # ABN AMBRO.
+      "9090-0000000",       # Royal Bank of Scotland.
       "9100-0000000",       # Nordnet Bank.
       "9120-0000000",       # SEB.
       "9130-0000000",       # SEB.
       "9150-0000000",       # Skandiabanken.
       "9170-0000000",       # Ikano Bank.
-      "9180-0000000",       # Danske Bank.
+      "9180-0000000000",    # Danske Bank.
       "9190-0000000",       # Den Norske Bank.
-      "9200-00",            # Stadshypotek Bank.
-      "9230-0000000",       # Bank2.
-      "9231-00",            # SalusAnsvar Bank.
-      "9260-00",            # Gjensidige NOR Sparebank.
+      "9230-0000000",       # Marginalen.
+      "9250-0000000",       # SBAB.
+      "9260-0000000",       # Den Norske Bank.
       "9270-0000000",       # ICA Banken.
       "9280-0000000",       # Resurs Bank.
-      "9290-00",            # Coop Bank.
       "9300-0000000000",    # Sparbanken Öresund.
       "9400-0000000",       # Forex Bank.
       "9460-0000000",       # GE Money Bank.
-      "9469-0000000",       # GE Money Bank.
-      "9500-0000000000",    # Plusgirot Bank.
-      "9548-00",            # Ekobanken.
-      "9549-00",            # JAK Medlemsbank.
+      "9470-0000000",       # Fortis Bank.
+      "9500-00",            # Nordea/Plusgirot.
       "9550-0000000",       # Avanza Bank.
       "9570-0000000000",    # Sparbanken Syd.
-      "9960-0000000000",    # Plusgirot Bank.
+      "9960-00",            # Nordea/Plusgirot.
 
     ].each do |number|
       it "should be empty for a valid number like #{number}" do
