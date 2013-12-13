@@ -11,13 +11,13 @@ describe BankTools::SE::Plusgiro do
 
     it "should be true with no errors" do
       account = BankTools::SE::Plusgiro.new("foo")
-      account.stub!(:errors).and_return([])
+      account.stub(:errors).and_return([])
       account.should be_valid
     end
 
     it "should be false with errors" do
       account = BankTools::SE::Plusgiro.new("foo")
-      account.stub!(:errors).and_return([:error])
+      account.stub(:errors).and_return([:error])
       account.should_not be_valid
     end
 
