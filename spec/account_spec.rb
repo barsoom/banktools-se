@@ -167,8 +167,8 @@ describe BankTools::SE::Account do
       account = BankTools::SE::Account.new(" 1-2-3 ").normalize.should == " 1-2-3 "
     end
 
-    it "should prepend zereos to the serial number if necessary" do
-      BankTools::SE::Account.new("8000-2-80000003").normalize.should == "8000-2-0080000003"
+    it "should prepend zeroes to the serial number if necessary" do
+      BankTools::SE::Account.new("8000-2-80000003").normalize.should   == "8000-2-0080000003"
       BankTools::SE::Account.new("8000-2-8000000003").normalize.should == "8000-2-8000000003"
     end
 
