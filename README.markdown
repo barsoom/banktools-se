@@ -92,7 +92,6 @@ to install it.
 
 Possible improvements to make:
 
-  * Handle [Sparbanken zerofill](http://www.danskebank.se/sv-se/eBanking-content/text-pages/Pages/Bankliste2.aspx).
   * Luhn validation based on [BGC docs](http://www.bgc.se/upload/Gemensamt/Trycksaker/Manualer/BG910.pdf).
 
 
