@@ -78,6 +78,12 @@ describe BankTools::SE::Account do
       BankTools::SE::Account.new("11007").errors.should include(BankTools::SE::Errors::TOO_SHORT)
     end
 
+    it "should not include :too_short for Swedbank/Sparbanker numbers that can be zerofilled" do
+      BankTools::SE::Account.new("8000-2-00000000").errors.should_not include(BankTools::SE::Errors::TOO_SHORT)
+      BankTools::SE::Account.new("9300-2-00000000").errors.should_not include(BankTools::SE::Errors::TOO_SHORT)
+      BankTools::SE::Account.new("9570-2-00000000").errors.should_not include(BankTools::SE::Errors::TOO_SHORT)
+    end
+
     it "should include :too_long for numbers longer than the bank allows" do
       BankTools::SE::Account.new("1100000000007").errors.should include(BankTools::SE::Errors::TOO_LONG)
     end
@@ -159,6 +165,11 @@ describe BankTools::SE::Account do
 
     it "should not attempt to normalize invalid numbers" do
       account = BankTools::SE::Account.new(" 1-2-3 ").normalize.should == " 1-2-3 "
+    end
+
+    it "should prepend zereos to the serial number if necessary" do
+      BankTools::SE::Account.new("8000-2-80000003").normalize.should == "8000-2-0080000003"
+      BankTools::SE::Account.new("8000-2-8000000003").normalize.should == "8000-2-8000000003"
     end
 
   end

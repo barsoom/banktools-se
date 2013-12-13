@@ -25,7 +25,7 @@ module BankTools
         6000..6999 => { :name => "Handelsbanken", :serial_number_length => 9 },
         7000..7999 => { :name => "Swedbank" },
         # Can be fewer chars but must be zero-filled, so let's call it 10.
-        8000..8999 => { :name => "Swedbank", :serial_number_length => 10, :checksum_for_clearing => true },
+        8000..8999 => { :name => "Swedbank", :serial_number_length => 10, :checksum_for_clearing => true, :zerofill => true },
         9020..9029 => { :name => "Länsförsäkringar Bank" },
         9040..9049 => { :name => "Citibank" },
         9060..9069 => { :name => "Länsförsäkringar Bank" },
@@ -42,13 +42,13 @@ module BankTools
         9260..9269 => { :name => "Den Norske Bank" },
         9270..9279 => { :name => "ICA Banken" },
         9280..9289 => { :name => "Resurs Bank" },
-        9300..9349 => { :name => "Sparbanken Öresund", :serial_number_length => 10 },
+        9300..9349 => { :name => "Sparbanken Öresund", :serial_number_length => 10, :zerofill => true },
         9400..9449 => { :name => "Forex Bank" },
         9460..9469 => { :name => "GE Money Bank" },
         9470..9479 => { :name => "Fortis Bank" },
         9500..9549 => { :name => "Nordea/Plusgirot", :serial_number_length => 1..10 },
         9550..9569 => { :name => "Avanza Bank" },
-        9570..9579 => { :name => "Sparbanken Syd", :serial_number_length => 10 },
+        9570..9579 => { :name => "Sparbanken Syd", :serial_number_length => 10, :zerofill => true},
         9960..9969 => { :name => "Nordea/Plusgirot", :serial_number_length => 1..10 },
       }
 
@@ -98,7 +98,8 @@ module BankTools
       end
 
       def serial_number
-        digits.slice(clearing_number_length..-1) || ""
+        number = digits.slice(clearing_number_length..-1) || ""
+        zerofill? ? "%.#{bank_data[:serial_number_length]}d" % number : number
       end
 
       private
@@ -144,6 +145,13 @@ module BankTools
         number.to_s.gsub(/\D/, '')
       end
 
+      def zerofill?
+        !!bank_data[:zerofill]
+      end
+
+      def zerofill
+        "%010d" % serial_number.to_i
+      end
     end
   end
 end
