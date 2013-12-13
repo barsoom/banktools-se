@@ -149,9 +149,6 @@ module BankTools
         !!bank_data[:zerofill]
       end
 
-      def zerofill
-        "%010d" % serial_number.to_i
-      end
     end
   end
 end
