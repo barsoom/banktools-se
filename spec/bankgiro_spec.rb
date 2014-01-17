@@ -83,4 +83,41 @@ describe BankTools::SE::Bankgiro do
       BankTools::SE::Bankgiro.new("5402-9681").should_not be_fundraising
     end
   end
+
+  # http://www.bgc.se/upload/Gemensamt/Trycksaker/Manualer/BG6070.pdf section 5.2
+  describe ".number_to_ocr" do
+    it "adds a mod-10 check digit" do
+      BankTools::SE::Bankgiro.number_to_ocr("123").should eq "1230"
+    end
+
+    it "can add an optional length digit" do
+      BankTools::SE::Bankgiro.number_to_ocr("1234567890", length_digit: true).should eq "123456789023"
+    end
+
+    it "can pad the number" do
+      BankTools::SE::Bankgiro.number_to_ocr("1234567890", length_digit: true, pad: "0").should eq "1234567890037"
+    end
+
+    it "raises if resulting number is > 25 digits" do
+      expect { BankTools::SE::Bankgiro.number_to_ocr("1234567890123456789012345") }.to raise_error(BankTools::SE::Bankgiro::OverlongOCR)
+    end
+  end
+
+  describe ".number_from_ocr" do
+    it "strips the mod-10 check digit" do
+      BankTools::SE::Bankgiro.number_from_ocr("1230").should eq "123"
+    end
+
+    it "can strip an optional length digit" do
+      BankTools::SE::Bankgiro.number_from_ocr("123456789023", length_digit: true).should eq "1234567890"
+    end
+
+    it "can pad the number" do
+      BankTools::SE::Bankgiro.number_from_ocr("1234567890037", length_digit: true, pad: "0").should eq "1234567890"
+    end
+
+    it "raises if check digit is wrong" do
+      expect { BankTools::SE::Bankgiro.number_from_ocr("1231") }.to raise_error(BankTools::SE::Bankgiro::BadCheckDigit)
+    end
+  end
 end

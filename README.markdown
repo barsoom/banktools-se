@@ -44,6 +44,13 @@ to install it.
     fundraising_account = BankTools::SE::Bankgiro.new("902-0033")
     fundraising_account.fundraising?  # => true
 
+    # OCR
+    BankTools::SE::Bankgiro.number_to_ocr("123")  # => "1230"
+    BankTools::SE::Bankgiro.number_to_ocr("123", length_digit: true)  # => "12351"
+    BankTools::SE::Bankgiro.number_to_ocr("123", length_digit: true, pad: "0")  # => "123067"
+    BankTools::SE::Bankgiro.number_from_ocr("1230")  # => "123"
+    BankTools::SE::Bankgiro.number_from_ocr("123067", length_digit: true, pad: "0")  # => "123"
+
 
     # Plusgiro
 

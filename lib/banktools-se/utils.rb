@@ -13,6 +13,16 @@ module BankTools
         sum % 10 == 0
       end
 
+      def self.luhn_checksum(number)
+        digits = number.to_s.scan(/\d/).reverse.map { |x| x.to_i }
+        digits = digits.each_with_index.map { |d, i|
+          d *= 2 if i.even?
+          d > 9 ? d - 9 : d
+        }
+        sum = digits.inject(0) { |m, x| m + x }
+        mod = 10 - sum % 10
+        mod == 10 ? 0 : mod
+      end
     end
   end
 end
