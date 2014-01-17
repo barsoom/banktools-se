@@ -116,8 +116,8 @@ describe BankTools::SE::Bankgiro do
       BankTools::SE::Bankgiro.number_from_ocr("1234567890037", length_digit: true, pad: "0").should eq "1234567890"
     end
 
-    it "raises if check digit is wrong" do
-      expect { BankTools::SE::Bankgiro.number_from_ocr("1231") }.to raise_error(BankTools::SE::Bankgiro::BadCheckDigit)
+    it "raises if checksum is wrong" do
+      expect { BankTools::SE::Bankgiro.number_from_ocr("1231") }.to raise_error(BankTools::SE::Bankgiro::BadChecksum)
     end
   end
 end

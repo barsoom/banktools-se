@@ -4,7 +4,7 @@ module BankTools
   module SE
     class Bankgiro
       class OverlongOCR < StandardError; end
-      class BadCheckDigit < StandardError; end
+      class BadChecksum < StandardError; end
 
       class OCR
         def self.number_to_ocr(number, opts = {})
@@ -32,7 +32,7 @@ module BankTools
           strip_length_digit = opts.fetch(:length_digit, false)
           strip_padding = opts.fetch(:pad, "")
 
-          raise BadCheckDigit unless Utils.valid_luhn?(number)
+          raise BadChecksum unless Utils.valid_luhn?(number)
 
           digits_to_chop  = 1  # Checksum.
           digits_to_chop += 1 if strip_length_digit
