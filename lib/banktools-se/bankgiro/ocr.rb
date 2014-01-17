@@ -3,8 +3,9 @@
 module BankTools
   module SE
     class Bankgiro
-      class OverlongOCR < StandardError; end
-      class BadChecksum < StandardError; end
+      class InvalidOCR < StandardError; end
+      class OverlongOCR < InvalidOCR; end
+      class BadChecksum < InvalidOCR; end
 
       class OCR
         def self.number_to_ocr(number, opts = {})
