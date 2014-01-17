@@ -33,6 +33,8 @@ module BankTools
           strip_length_digit = opts.fetch(:length_digit, false)
           strip_padding = opts.fetch(:pad, "")
 
+          number = number.to_s
+
           raise BadChecksum unless Utils.valid_luhn?(number)
 
           digits_to_chop  = 1  # Checksum.

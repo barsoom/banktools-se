@@ -90,6 +90,10 @@ describe BankTools::SE::Bankgiro do
       BankTools::SE::Bankgiro.number_to_ocr("123").should eq "1230"
     end
 
+    it "handles integer input" do
+      BankTools::SE::Bankgiro.number_to_ocr(123).should eq "1230"
+    end
+
     it "can add an optional length digit" do
       BankTools::SE::Bankgiro.number_to_ocr("1234567890", length_digit: true).should eq "123456789023"
     end
@@ -106,6 +110,10 @@ describe BankTools::SE::Bankgiro do
   describe ".number_from_ocr" do
     it "strips the mod-10 check digit" do
       BankTools::SE::Bankgiro.number_from_ocr("1230").should eq "123"
+    end
+
+    it "handles integer input" do
+      BankTools::SE::Bankgiro.number_from_ocr(1230).should eq "123"
     end
 
     it "can strip an optional length digit" do
