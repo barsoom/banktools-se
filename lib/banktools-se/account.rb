@@ -99,7 +99,7 @@ module BankTools
 
       def serial_number
         number = digits.slice(clearing_number_length..-1) || ""
-        zerofill? ? "%.#{bank_data[:serial_number_length]}d" % number : number
+        zerofill? ? "%.#{bank_data[:serial_number_length]}d" % number.to_i(10) : number
       end
 
       private
