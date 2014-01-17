@@ -4,13 +4,11 @@ require "spec_helper"
 require "banktools-se"
 
 describe BankTools::SE::Account do
-
   it "should initialize" do
     BankTools::SE::Account.new("foo").should be_a(BankTools::SE::Account)
   end
 
   describe "#valid?" do
-
     it "should be true with no errors" do
       account = BankTools::SE::Account.new("foo")
       account.stub(:errors).and_return([])
@@ -22,7 +20,6 @@ describe BankTools::SE::Account do
       account.stub(:errors).and_return([:error])
       account.should_not be_valid
     end
-
   end
 
   describe "#errors" do
@@ -107,11 +104,9 @@ describe BankTools::SE::Account do
       BankTools::SE::Account.new("10000000009").errors.should include(BankTools::SE::Errors::UNKNOWN_CLEARING_NUMBER)
       BankTools::SE::Account.new("11000000007").errors.should_not include(BankTools::SE::Errors::UNKNOWN_CLEARING_NUMBER)
     end
-
   end
 
   describe "#bank" do
-
     it "should return the bank for the current clearing number" do
       BankTools::SE::Account.new("11000000007").bank.should == "Nordea"
       BankTools::SE::Account.new("11550000001").bank.should == "Nordea"
@@ -122,11 +117,9 @@ describe BankTools::SE::Account do
     it "should return nil for unknown clearing numbers" do
       BankTools::SE::Account.new("10000000009").bank.should be_nil
     end
-
   end
 
   describe "#clearing_number" do
-
     it "should be the first four digits" do
       BankTools::SE::Account.new("12345678").clearing_number.should == "1234"
     end
@@ -134,11 +127,9 @@ describe BankTools::SE::Account do
     it "should be the first five digits if there is a clearing number checksum" do
       BankTools::SE::Account.new("8000-2-0000000000").clearing_number.should == "8000-2"
     end
-
   end
 
   describe "#serial_number" do
-
     it "should be the digits after the first four digits" do
       BankTools::SE::Account.new("12345678").serial_number.should == "5678"
     end
@@ -157,7 +148,6 @@ describe BankTools::SE::Account do
   end
 
   describe "#normalize" do
-
     it "should normalize to clearing number dash serial number" do
       account = BankTools::SE::Account.new("11000000007").normalize.should == "1100-0000007"
     end
@@ -174,7 +164,5 @@ describe BankTools::SE::Account do
       BankTools::SE::Account.new("8000-2-80000003").normalize.should   == "8000-2-0080000003"
       BankTools::SE::Account.new("8000-2-8000000003").normalize.should == "8000-2-8000000003"
     end
-
   end
-
 end

@@ -2,13 +2,11 @@ require "spec_helper"
 require "banktools-se"
 
 describe BankTools::SE::Bankgiro do
-
   it "should initialize" do
     BankTools::SE::Bankgiro.new("foo").should be_a(BankTools::SE::Bankgiro)
   end
 
   describe "#valid?" do
-
     it "should be true with no errors" do
       account = BankTools::SE::Bankgiro.new("foo")
       account.stub(:errors).and_return([])
@@ -20,7 +18,6 @@ describe BankTools::SE::Bankgiro do
       account.stub(:errors).and_return([:error])
       account.should_not be_valid
     end
-
   end
 
   describe "#errors" do
@@ -54,11 +51,9 @@ describe BankTools::SE::Bankgiro do
     it "should include :bad_checksum if the Luhn/mod 10 checksum is incorrect" do
       BankTools::SE::Bankgiro.new("5402-9682").errors.should include(BankTools::SE::Errors::BAD_CHECKSUM)
     end
-
   end
 
   describe "#normalize" do
-
     it "should normalize 7-digit numbers to NNN-NNNN" do
       account = BankTools::SE::Bankgiro.new(" 6-40 - 5070")
       account.normalize.should == "640-5070"
@@ -73,11 +68,9 @@ describe BankTools::SE::Bankgiro do
       account = BankTools::SE::Bankgiro.new(" 1-2-3 ")
       account.normalize.should == " 1-2-3 "
     end
-
   end
 
   describe "#fundraising? (90-konto)" do
-
     it "should be true for the number series 900-nnnn to 904-nnnn" do
       BankTools::SE::Bankgiro.new("902-0033").should be_fundraising
     end
@@ -89,7 +82,5 @@ describe BankTools::SE::Bankgiro do
     it "should be false for numbers outside the right series" do
       BankTools::SE::Bankgiro.new("5402-9681").should_not be_fundraising
     end
-
   end
-
 end
