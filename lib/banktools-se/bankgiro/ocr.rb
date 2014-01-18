@@ -16,6 +16,7 @@ module BankTools
           add_length_digit = opts.fetch(:length_digit, false)
           pad = opts.fetch(:pad, "").to_s
 
+          # Padding isn't something BGC specifies, but we needed it to support a legacy scheme.
           number += pad
           # Adding 2: 1 length digit, 1 check digit.
           number += ((number.length + 2) % 10).to_s if add_length_digit
