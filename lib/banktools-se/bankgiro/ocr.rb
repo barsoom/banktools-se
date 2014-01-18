@@ -8,32 +8,32 @@ module BankTools
       class BadChecksum < InvalidOCR; end
 
       class OCR
+        MIN_LENGTH = 2
+        MAX_LENGTH = 25
+
         def self.number_to_ocr(number, opts = {})
-          add_length_digit = opts.fetch(:length_digit, false)
-          pad = opts.fetch(:pad, nil)
-
           number = number.to_s
+          add_length_digit = opts.fetch(:length_digit, false)
+          pad = opts.fetch(:pad, "").to_s
 
-          number += pad if pad
-
+          number += pad
           # Adding 2: 1 length digit, 1 check digit.
           number += ((number.length + 2) % 10).to_s if add_length_digit
 
           number_with_ocr = number + Utils.luhn_checksum(number).to_s
 
           length = number_with_ocr.length
-          if length > 25
-            raise OverlongOCR, "Bankgiro OCR must be 2-25 characters (this one would be #{length} characters)"
+          if length > MAX_LENGTH
+            raise OverlongOCR, "Bankgiro OCR must be #{MIN_LENGTH} - #{MAX_LENGTH} characters (this one would be #{length} characters)"
           end
 
           number_with_ocr
         end
 
         def self.number_from_ocr(number, opts = {})
-          strip_length_digit = opts.fetch(:length_digit, false)
-          strip_padding = opts.fetch(:pad, "")
-
           number = number.to_s
+          strip_length_digit = opts.fetch(:length_digit, false)
+          strip_padding = opts.fetch(:pad, "").to_s
 
           raise BadChecksum unless Utils.valid_luhn?(number)
 
