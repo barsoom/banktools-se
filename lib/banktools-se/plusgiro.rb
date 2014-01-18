@@ -21,7 +21,7 @@ module BankTools
         errors << Errors::TOO_SHORT if digits.length < 2
         errors << Errors::TOO_LONG if digits.length > 8
         errors << Errors::INVALID_CHARACTERS if number.to_s.match(/[^0-9 -]/)
-        errors << Errors::BAD_CHECKSUM unless BankTools::SE::Utils.valid_luhn?(number)
+        errors << Errors::BAD_CHECKSUM unless Utils.valid_luhn?(number)
 
         errors
       end

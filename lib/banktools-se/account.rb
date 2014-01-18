@@ -67,10 +67,10 @@ module BankTools
 
         errors << Errors::TOO_SHORT if serial_number.length < min_length
         errors << Errors::TOO_LONG if serial_number.length > max_length
-        errors << Errors::INVALID_CHARACTERS if number.to_s.match(/[^0-9 -]/)
+        errors << Errors::INVALID_CHARACTERS if number.to_s.match(/[^\d -]/)
 
         if luhn_for_serial?
-          errors << Errors::BAD_CHECKSUM unless BankTools::SE::Utils.valid_luhn?(serial_number)
+          errors << Errors::BAD_CHECKSUM unless Utils.valid_luhn?(serial_number)
         end
 
         errors << Errors::UNKNOWN_CLEARING_NUMBER unless bank
