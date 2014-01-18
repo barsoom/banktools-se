@@ -39,7 +39,7 @@ module BankTools
       # http://www.plusgirot.se/Om+PlusGirot/90-konton/508552.html
       # http://www.insamlingskontroll.se/
       def fundraising?
-        valid? && digits.match(/^90\d{5}$/)
+        valid? && digits.match(/\A90\d{5}$/)
       end
 
       private

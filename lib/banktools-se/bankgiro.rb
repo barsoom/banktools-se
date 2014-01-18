@@ -43,7 +43,7 @@ module BankTools
       end
 
       def fundraising?
-        valid? && digits.match(/^90[0-4]/)
+        valid? && digits.match(/\A90[0-4]/)
       end
 
       private
