@@ -8,22 +8,11 @@ Ruby gem to validate, normalize/prettify and to some extent interpret
   * Swedish plusgiro numbers
   * Swedish bankgiro numbers
 
+It can also generate and unpack Bankgiro OCR numbers (reference codes) with a check digit, optional length digit and optional padding digits.
+
 This gem does what it can to weed out invalid numbers but errs on the side of allowing too much, in the absence of good specifications, so be advised that a "valid" number might still be incorrect.
 
 Inspired by [iulianu/iban-tools](https://github.com/iulianu/iban-tools). Please consider contributing gems for your country.
-
-
-## Installation
-
-With Bundler for e.g. Ruby on Rails, add this to your `Gemfile`:
-
-    gem 'banktools-se', :git => 'git://github.com/barsoom/banktools-se.git'
-
-and run
-
-    bundle
-
-to install it.
 
 
 ## Usage
@@ -95,11 +84,32 @@ to install it.
     BankTools::SE::Errors::UNKNOWN_CLEARING_NUMBER  # => :unknown_clearing_number
 
 
+## Installation
+
+Add this line to your application's Gemfile:
+
+    gem 'banktools-se'
+
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install banktools-se
+
+
 ## TODO
 
 Possible improvements to make:
 
   * Luhn validation based on [BGC docs](http://www.bgc.se/upload/Gemensamt/Trycksaker/Manualer/BG910.pdf).
+
+
+## Also see
+
+* [BankTools::DE (German)](https://github.com/barsoom/banktools-de)
+* [iban-tools](https://github.com/iulianu/iban-tools)
 
 
 ## Credits and license
