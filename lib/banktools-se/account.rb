@@ -73,15 +73,13 @@ module BankTools
 
       def bank_data
         number = digits[0,4].to_i
-        _, found_data = CLEARING_NUMBER_MAP.find do |interval, data|
-          interval.include?(number)
-        end
+        _, found_data = CLEARING_NUMBER_MAP.find { |interval, data| interval.include?(number) }
         found_data || {}
       end
 
       def min_length
         if bank_data
-          Array(bank_data[:serial_number_length] || DEFAULT_SERIAL_NUMBER_LENGTH).first
+          Array(serial_number_length).first
         else
           0
         end
@@ -89,7 +87,7 @@ module BankTools
 
       def max_length
         if bank_data
-          Array(bank_data[:serial_number_length] || DEFAULT_SERIAL_NUMBER_LENGTH).last +
+          Array(serial_number_length).last +
             (checksum_for_clearing? ? 1 : 0)
         else
           1/0.0  # Infinity.
@@ -97,7 +95,7 @@ module BankTools
       end
 
       def serial_number_length
-        bank_data[:serial_number_length]
+        bank_data.fetch(:serial_number_length, DEFAULT_SERIAL_NUMBER_LENGTH)
       end
 
       def luhn_for_serial?
