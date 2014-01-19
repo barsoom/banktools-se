@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module BankTools
   module SE
     class Account
