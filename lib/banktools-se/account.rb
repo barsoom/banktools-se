@@ -99,7 +99,12 @@ module BankTools
 
       def serial_number
         number = digits.slice(clearing_number_length..-1) || ""
-        zerofill? ? "%.#{bank_data[:serial_number_length]}d" % number : number
+
+        if zerofill?
+          number.rjust(serial_number_length, "0")
+        else
+          number
+        end
       end
 
       private
@@ -131,6 +136,10 @@ module BankTools
         else
           1/0.0  # Infinity.
         end
+      end
+
+      def serial_number_length
+        bank_data[:serial_number_length]
       end
 
       def luhn_for_serial?
