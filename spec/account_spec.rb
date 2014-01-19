@@ -142,9 +142,6 @@ describe BankTools::SE::Account do
       BankTools::SE::Account.new("12").serial_number.should == ""
     end
 
-    it "should manage pre-zerofilled account numbers" do
-      BankTools::SE::Account.new("8000-2-0800000002").should be_valid
-    end
   end
 
   describe "#normalize" do
