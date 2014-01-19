@@ -42,7 +42,7 @@ module BankTools
           9470..9479 => { name: "Fortis Bank" },
           9500..9549 => { name: "Nordea/Plusgirot", serial_number_length: 1..10 },
           9550..9569 => { name: "Avanza Bank" },
-          9570..9579 => { name: "Sparbanken Syd", serial_number_length: 10, zerofill: true},
+          9570..9579 => { name: "Sparbanken Syd", serial_number_length: 10, zerofill: true },
           9960..9969 => { name: "Nordea/Plusgirot", serial_number_length: 1..10 },
         }
       end
