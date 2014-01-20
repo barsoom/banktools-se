@@ -6,6 +6,7 @@ module BankTools
       class InvalidOCR < StandardError; end
       class OverlongOCR < InvalidOCR; end
       class BadChecksum < InvalidOCR; end
+      class MustBeNumeric < InvalidOCR; end
 
       class OCR
         MIN_LENGTH = 2
@@ -16,6 +17,7 @@ module BankTools
           add_length_digit = opts.fetch(:length_digit, false)
           pad = opts.fetch(:pad, "").to_s
 
+          raise MustBeNumeric unless number.match(/\A\d+\z/)
           # Padding isn't something BGC specifies, but we needed it to support a legacy scheme.
           number += pad
           # Adding 2: 1 length digit, 1 check digit.
@@ -36,6 +38,7 @@ module BankTools
           strip_length_digit = opts.fetch(:length_digit, false)
           strip_padding = opts.fetch(:pad, "").to_s
 
+          raise MustBeNumeric unless number.match(/\A\d+\z/)
           raise BadChecksum unless Utils.valid_luhn?(number)
 
           digits_to_chop  = 1  # Checksum.

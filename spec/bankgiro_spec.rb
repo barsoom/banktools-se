@@ -105,6 +105,10 @@ describe BankTools::SE::Bankgiro do
     it "raises if resulting number is > 25 digits" do
       expect { BankTools::SE::Bankgiro.number_to_ocr("1234567890123456789012345") }.to raise_error(BankTools::SE::Bankgiro::OverlongOCR)
     end
+
+    it "raises if input is non-numeric" do
+      expect { BankTools::SE::Bankgiro.number_to_ocr("garbage") }.to raise_error(BankTools::SE::Bankgiro::MustBeNumeric)
+    end
   end
 
   describe ".number_from_ocr" do
@@ -126,6 +130,10 @@ describe BankTools::SE::Bankgiro do
 
     it "raises if checksum is wrong" do
       expect { BankTools::SE::Bankgiro.number_from_ocr("1231") }.to raise_error(BankTools::SE::Bankgiro::BadChecksum)
+    end
+
+    it "raises if input is non-numeric" do
+      expect { BankTools::SE::Bankgiro.number_from_ocr("garbage") }.to raise_error(BankTools::SE::Bankgiro::MustBeNumeric)
     end
   end
 end
