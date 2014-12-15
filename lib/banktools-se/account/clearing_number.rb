@@ -18,7 +18,7 @@ module BankTools
           3782..3782 => { name: "Nordea", serial_number_length: 10, luhn_for_serial: true },  # Personkonto.
           3783..4999 => { name: "Nordea" },
           5000..5999 => { name: "SEB" },
-          6000..6999 => { name: "Handelsbanken", serial_number_length: 9 },
+          6000..6999 => { name: "Handelsbanken", serial_number_length: 8..9 },
           7000..7999 => { name: "Swedbank" },
           # Can be fewer chars but must be zero-filled, so let's call it 10.
           8000..8999 => { name: "Swedbank", serial_number_length: 10, checksum_for_clearing: true, zerofill: true },
