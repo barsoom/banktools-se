@@ -38,7 +38,7 @@ describe BankTools::SE::Account do
       "3783-0000000",       # Nordea.
       "5000-0000000",       # SEB.
       "6000-000000000",     # Handelsbanken.
-      "6000-00000000",     # Handelsbanken.
+      "6000-00000000",      # Handelsbanken.
       "7000-0000000",       # Swedbank.
       "8000-2-0000000000",  # Swedbank/Sparbanker with clearing number checksum.
       "9020-0000000",       # Länsförsäkringar Bank.
