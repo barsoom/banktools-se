@@ -95,8 +95,8 @@ describe BankTools::SE::Account do
     end
 
     it "should include :bad_checksum for Nordea personkonto if the serial Luhn/mod 10 checksum is incorrect" do
-      BankTools::SE::Utils.valid_luhn?("800928-6249").should be_true
-      BankTools::SE::Utils.valid_luhn?("3300-800928-6249").should be_false
+      BankTools::SE::Utils.valid_luhn?("800928-6249").should eq(true)
+      BankTools::SE::Utils.valid_luhn?("3300-800928-6249").should eq(false)
       BankTools::SE::Account.new("3300-800928-6249").errors.should_not include(BankTools::SE::Errors::BAD_CHECKSUM)
     end
 

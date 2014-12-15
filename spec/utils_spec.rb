@@ -19,7 +19,7 @@ describe BankTools::SE::Utils, "valid_luhn?" do
     "5402-9681",
   ].each do |number|
     it "should allow a valid number like #{number}" do
-      BankTools::SE::Utils.valid_luhn?(number).should be_true
+      BankTools::SE::Utils.valid_luhn?(number).should eq(true)
     end
   end
 
@@ -29,7 +29,7 @@ describe BankTools::SE::Utils, "valid_luhn?" do
     "5402-9682",
   ].each do |number|
     it "should disallow an invalid number like #{number}" do
-      BankTools::SE::Utils.valid_luhn?(number).should be_false
+      BankTools::SE::Utils.valid_luhn?(number).should eq(false)
     end
   end
 
