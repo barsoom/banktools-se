@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# http://www.bgc.se/upload/Gemensamt/Trycksaker/Manualer/BG910.pdf
+# http://web.archive.org/web/20130613010943/http://www.bgc.se/upload/Gemensamt/Trycksaker/Manualer/BG910.pdf
 
 require "banktools-se/account/clearing_number"
 

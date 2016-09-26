@@ -105,7 +105,7 @@ Or install it yourself as:
 
 Possible improvements to make:
 
-  * Luhn validation based on [BGC docs](http://www.bgc.se/upload/Gemensamt/Trycksaker/Manualer/BG910.pdf).
+  * Luhn validation based on [BGC docs](http://web.archive.org/web/20130613010943/http://www.bgc.se/upload/Gemensamt/Trycksaker/Manualer/BG910.pdf).
 
 
 ## Also see

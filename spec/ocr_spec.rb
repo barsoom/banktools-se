@@ -2,7 +2,7 @@ require "spec_helper"
 require "banktools-se"
 
 describe BankTools::SE::OCR do
-  # http://www.bgc.se/upload/Gemensamt/Trycksaker/Manualer/BG6070.pdf section 5.2
+  # http://web.archive.org/web/20111216065227/http://www.bgc.se/upload/Gemensamt/Trycksaker/Manualer/BG6070.pdf section 5.2
   describe ".from_number" do
     it "adds a mod-10 check digit" do
       BankTools::SE::OCR.from_number("123").should eq "1230"
