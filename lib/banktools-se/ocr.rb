@@ -35,18 +35,18 @@ module BankTools
         number_with_ocr
       end
 
-      def self.to_number(number, length_digit: false, pad: "")
-        number = number.to_s
+      def self.to_number(ocr, length_digit: false, pad: "")
+        ocr = ocr.to_s
         should_have_length_digit = length_digit
         strip_padding = pad.to_s
 
-        raise MustBeNumeric unless number.match(/\A\d+\z/)
-        raise BadChecksum unless Utils.valid_luhn?(number)
-        raise TooShortOCR if number.length < MIN_LENGTH
+        raise MustBeNumeric unless ocr.match(/\A\d+\z/)
+        raise BadChecksum unless Utils.valid_luhn?(ocr)
+        raise TooShortOCR if ocr.length < MIN_LENGTH
 
         if should_have_length_digit
-          length_digit = number[-2]
-          last_digit_of_actual_length = number.length.to_s[-1]
+          length_digit = ocr[-2]
+          last_digit_of_actual_length = ocr.length.to_s[-1]
           raise BadLengthDigit if length_digit != last_digit_of_actual_length
         end
 
@@ -56,12 +56,12 @@ module BankTools
         if strip_padding.length > 0
           expected_padding_end = -digits_to_chop - 1
           expected_padding_start = expected_padding_end - strip_padding.length + 1
-          raise BadPadding if number[expected_padding_start..expected_padding_end] != strip_padding
+          raise BadPadding if ocr[expected_padding_start..expected_padding_end] != strip_padding
         end
 
         digits_to_chop += strip_padding.length
 
-        number[0...-digits_to_chop]
+        ocr[0...-digits_to_chop]
       end
 
       def self.find_all_in_string(string, length_digit: false, pad: "")
