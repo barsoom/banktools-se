@@ -28,7 +28,7 @@ module BankTools
 
         length = number_with_ocr.length
         if length > MAX_LENGTH
-          raise OverlongOCR, "Bankgiro OCR must be #{MIN_LENGTH} - #{MAX_LENGTH} characters (this one would be #{length} characters)"
+          raise OverlongOCR, "OCR must be #{MIN_LENGTH} - #{MAX_LENGTH} characters (this one would be #{length} characters)"
         end
 
         number_with_ocr
