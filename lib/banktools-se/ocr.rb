@@ -5,6 +5,7 @@ module BankTools
     class OCR
       class InvalidOCR < StandardError; end
       class OverlongOCR < InvalidOCR; end
+      class TooShortOCR < InvalidOCR; end
       class BadPadding < InvalidOCR; end
       class BadLengthDigit < InvalidOCR; end
       class BadChecksum < InvalidOCR; end
@@ -41,6 +42,7 @@ module BankTools
 
         raise MustBeNumeric unless number.match(/\A\d+\z/)
         raise BadChecksum unless Utils.valid_luhn?(number)
+        raise TooShortOCR if number.length < MIN_LENGTH
 
         if should_have_length_digit
           length_digit = number[-2]

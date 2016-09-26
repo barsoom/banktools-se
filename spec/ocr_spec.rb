@@ -46,6 +46,11 @@ describe BankTools::SE::OCR do
       BankTools::SE::OCR.to_number("1234567890037", length_digit: true, pad: "0").should eq "1234567890"
     end
 
+    it "raises if the given number is too short to be a valid OCR" do
+      expect { BankTools::SE::OCR.to_number("0") }.to raise_error(BankTools::SE::OCR::TooShortOCR)
+      expect { BankTools::SE::OCR.to_number("00") }.not_to raise_error
+    end
+
     it "raises if checksum is wrong" do
       expect { BankTools::SE::OCR.to_number("1231") }.to raise_error(BankTools::SE::OCR::BadChecksum)
     end
