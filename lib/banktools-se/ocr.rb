@@ -64,10 +64,15 @@ module BankTools
         ocr[0...-digits_to_chop]
       end
 
-      def self.find_all_in_string(string, length_digit: false, pad: "")
+      def self.find_all_in_string(string, length_digit: false, pad: "", min_length: 4)
         expanded_string = string + " " + string.gsub("\n", "") + " " + string.gsub(";", "")
 
-        expanded_string.scan(/\d+/).select { |candidate|
+        numbers = expanded_string.scan(/\d+/)
+
+        expanded_numbers = with_numbers_found_by_removing_prefix_and_postfix(numbers).
+          reject { |n| n.length < min_length }
+
+        expanded_numbers.select { |candidate|
           begin
             to_number(candidate, length_digit: length_digit, pad: pad)
             true
@@ -75,6 +80,20 @@ module BankTools
             false
           end
         }.uniq
+      end
+
+      private
+
+      private_class_method \
+        def self.with_numbers_found_by_removing_prefix_and_postfix(numbers)
+          numbers + numbers.flat_map { |number|
+            0.upto(number.size).flat_map { |i|
+              [
+                number[0...i],
+                number[i...number.size],
+              ]
+            }
+          }
       end
     end
   end

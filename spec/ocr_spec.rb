@@ -77,7 +77,7 @@ describe BankTools::SE::OCR do
       expect(BankTools::SE::OCR.find_all_in_string("1230 1234 4564")).to eq [ "1230", "4564" ]
     end
 
-    it "requires OCRs to comply with length_digit and pad options" do
+    it "requires OCRs to comply with the specified length_digit and pad options" do
       string = "1230 4564 123067 456061"
       expect(BankTools::SE::OCR.find_all_in_string(string)).to eq [ "1230", "4564", "123067", "456061" ]
       expect(BankTools::SE::OCR.find_all_in_string(string, length_digit: true, pad: "0")).to eq [ "123067", "456061" ]
@@ -88,13 +88,36 @@ describe BankTools::SE::OCR do
     end
 
     it "handles OCR numbers both separated and split by newlines" do
-      expect(BankTools::SE::OCR.find_all_in_string("1230\n4564")).to eq [ "1230", "4564", "12304564" ]
+      expect(BankTools::SE::OCR.find_all_in_string("1230\n4564")).to include "1230", "4564", "12304564"
       expect(BankTools::SE::OCR.find_all_in_string("45\n64")).to eq [ "4564" ]
     end
 
     it "handles OCR numbers both separated and split by semicolons" do
-      expect(BankTools::SE::OCR.find_all_in_string("1230;4564")).to eq [ "1230", "4564", "12304564" ]
+      expect(BankTools::SE::OCR.find_all_in_string("1230;4564")).to include "1230", "4564", "12304564"
       expect(BankTools::SE::OCR.find_all_in_string("45;64")).to eq [ "4564" ]
+    end
+
+    it "handles numbers smushed together" do
+      # "Ref 1: 1230" with characters gone missing.
+      expect(BankTools::SE::OCR.find_all_in_string("REF 11230")).to include "1230"
+
+      # Two OCRs without separation.
+      expect(BankTools::SE::OCR.find_all_in_string("12304564")).to include "1230", "4564"
+
+      # Amount smushed into OCR.
+      expect(BankTools::SE::OCR.find_all_in_string("EHRENKRONAAUFTR: EUR 17,183188720001 PAYMENT")).to include "3188720001"
+
+      # OCR smushed into item ID.
+      string = "Referenznummer 3201675000187604. HISTORISTISCHER SALONTISCH."
+      expect(BankTools::SE::OCR.find_all_in_string(string)).to include "3201675000"
+    end
+
+    it "lets you configure the accepted OCR min_length" do
+      expect(BankTools::SE::OCR.find_all_in_string("12304564")).to eq [ "12304564", "04564", "1230", "4564" ]
+      expect(BankTools::SE::OCR.find_all_in_string("12304564", min_length: 6)).to eq [ "12304564" ]
+
+      expect(BankTools::SE::OCR.find_all_in_string("1234")).to eq []
+      expect(BankTools::SE::OCR.find_all_in_string("1234", min_length: 2)).to eq [ "34" ]
     end
 
     it "excludes duplicates" do
