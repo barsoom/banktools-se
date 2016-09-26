@@ -13,10 +13,10 @@ module BankTools
       MIN_LENGTH = 2
       MAX_LENGTH = 25
 
-      def self.from_number(number, opts = {})
+      def self.from_number(number, length_digit: false, pad: "")
         number = number.to_s
-        add_length_digit = opts.fetch(:length_digit, false)
-        pad = opts.fetch(:pad, "").to_s
+        add_length_digit = length_digit
+        pad = pad.to_s
 
         raise MustBeNumeric unless number.match(/\A\d+\z/)
         # Padding isn't something BGC specifies, but we needed it to support a legacy scheme.
@@ -34,10 +34,10 @@ module BankTools
         number_with_ocr
       end
 
-      def self.to_number(number, opts = {})
+      def self.to_number(number, length_digit: false, pad: "")
         number = number.to_s
-        should_have_length_digit = opts.fetch(:length_digit, false)
-        strip_padding = opts.fetch(:pad, "").to_s
+        should_have_length_digit = length_digit
+        strip_padding = pad.to_s
 
         raise MustBeNumeric unless number.match(/\A\d+\z/)
         raise BadChecksum unless Utils.valid_luhn?(number)
