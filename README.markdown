@@ -8,7 +8,7 @@ Ruby gem to validate, normalize/prettify and to some extent interpret
   * Swedish plusgiro numbers
   * Swedish bankgiro numbers
 
-It can also generate and unpack Bankgiro OCR numbers (reference codes) with a check digit, optional length digit and optional padding digits.
+It can also generate and unpack payment OCR numbers (reference codes) with a check digit, optional length digit and optional padding digits.
 
 This gem does what it can to weed out invalid numbers but errs on the side of allowing too much, in the absence of good specifications, so be advised that a "valid" number might still be incorrect.
 
@@ -34,12 +34,11 @@ Inspired by [iulianu/iban-tools](https://github.com/iulianu/iban-tools). Please 
     fundraising_account.fundraising?  # => true
 
     # OCR
-    BankTools::SE::Bankgiro.number_to_ocr("123")  # => "1230"
-    BankTools::SE::Bankgiro.number_to_ocr("123", length_digit: true)  # => "12351"
-    BankTools::SE::Bankgiro.number_to_ocr("123", length_digit: true, pad: "0")  # => "123067"
-    BankTools::SE::Bankgiro.number_from_ocr("1230")  # => "123"
-    BankTools::SE::Bankgiro.number_from_ocr("123067", length_digit: true, pad: "0")  # => "123"
-
+    BankTools::SE::OCR.from_number("123")  # => "1230"
+    BankTools::SE::OCR.from_number("123", length_digit: true)  # => "12351"
+    BankTools::SE::OCR.from_number("123", length_digit: true, pad: "0")  # => "123067"
+    BankTools::SE::OCR.to_number("1230")  # => "123"
+    BankTools::SE::OCR.to_number("123067", length_digit: true, pad: "0")  # => "123"
 
     # Plusgiro
 

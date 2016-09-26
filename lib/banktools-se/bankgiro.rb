@@ -1,19 +1,8 @@
 # http://sv.wikipedia.org/wiki/Bankgirot#Bankgironummer
-
-require "banktools-se/bankgiro/ocr"
-
 module BankTools
   module SE
     class Bankgiro
       attr_reader :number
-
-      def self.number_to_ocr(number, opts = {})
-        OCR.number_to_ocr(number, opts)
-      end
-
-      def self.number_from_ocr(number, opts = {})
-        OCR.number_from_ocr(number, opts)
-      end
 
       def initialize(number)
         @number = number
