@@ -63,7 +63,9 @@ module BankTools
       end
 
       def self.find_all_in_string(string, length_digit: false, pad: "")
-        string.scan(/\d+/).select { |candidate|
+        expanded_string = string + " " + string.gsub("\n", "") + " " + string.gsub(";", "")
+
+        expanded_string.scan(/\d+/).select { |candidate|
           begin
             to_number(candidate, length_digit: length_digit, pad: pad)
             true

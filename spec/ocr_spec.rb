@@ -82,6 +82,16 @@ describe BankTools::SE::OCR do
       expect(BankTools::SE::OCR.find_all_in_string("x1230x")).to eq [ "1230" ]
     end
 
+    it "handles OCR numbers both separated and split by newlines" do
+      expect(BankTools::SE::OCR.find_all_in_string("1230\n4564")).to eq [ "1230", "4564", "12304564" ]
+      expect(BankTools::SE::OCR.find_all_in_string("45\n64")).to eq [ "4564" ]
+    end
+
+    it "handles OCR numbers both separated and split by semicolons" do
+      expect(BankTools::SE::OCR.find_all_in_string("1230;4564")).to eq [ "1230", "4564", "12304564" ]
+      expect(BankTools::SE::OCR.find_all_in_string("45;64")).to eq [ "4564" ]
+    end
+
     it "excludes duplicates" do
       expect(BankTools::SE::OCR.find_all_in_string("1230 1230 4564")).to eq [ "1230", "4564" ]
     end
