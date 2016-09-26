@@ -5,6 +5,8 @@ module BankTools
     class OCR
       class InvalidOCR < StandardError; end
       class OverlongOCR < InvalidOCR; end
+      class BadPadding < InvalidOCR; end
+      class BadLengthDigit < InvalidOCR; end
       class BadChecksum < InvalidOCR; end
       class MustBeNumeric < InvalidOCR; end
 
@@ -34,14 +36,27 @@ module BankTools
 
       def self.to_number(number, opts = {})
         number = number.to_s
-        strip_length_digit = opts.fetch(:length_digit, false)
+        should_have_length_digit = opts.fetch(:length_digit, false)
         strip_padding = opts.fetch(:pad, "").to_s
 
         raise MustBeNumeric unless number.match(/\A\d+\z/)
         raise BadChecksum unless Utils.valid_luhn?(number)
 
+        if should_have_length_digit
+          length_digit = number[-2]
+          last_digit_of_actual_length = number.length.to_s[-1]
+          raise BadLengthDigit if length_digit != last_digit_of_actual_length
+        end
+
         digits_to_chop  = 1  # Checksum.
-        digits_to_chop += 1 if strip_length_digit
+        digits_to_chop += 1 if should_have_length_digit
+
+        if strip_padding.length > 0
+          expected_padding_end = -digits_to_chop - 1
+          expected_padding_start = expected_padding_end - strip_padding.length + 1
+          raise BadPadding if number[expected_padding_start..expected_padding_end] != strip_padding
+        end
+
         digits_to_chop += strip_padding.length
 
         number[0...-digits_to_chop]

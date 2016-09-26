@@ -34,11 +34,14 @@ Inspired by [iulianu/iban-tools](https://github.com/iulianu/iban-tools). Please 
     fundraising_account.fundraising?  # => true
 
     # OCR
+
     BankTools::SE::OCR.from_number("123")  # => "1230"
     BankTools::SE::OCR.from_number("123", length_digit: true)  # => "12351"
     BankTools::SE::OCR.from_number("123", length_digit: true, pad: "0")  # => "123067"
+
     BankTools::SE::OCR.to_number("1230")  # => "123"
     BankTools::SE::OCR.to_number("123067", length_digit: true, pad: "0")  # => "123"
+    BankTools::SE::OCR.to_number("1230", length_digit: true, pad: "0")  # Raises exception because there's no length digit or padding.
 
     # Plusgiro
 

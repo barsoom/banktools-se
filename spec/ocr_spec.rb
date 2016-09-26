@@ -42,12 +42,24 @@ describe BankTools::SE::OCR do
       BankTools::SE::OCR.to_number("123456789023", length_digit: true).should eq "1234567890"
     end
 
-    it "can pad the number" do
+    it "strips the given padding" do
       BankTools::SE::OCR.to_number("1234567890037", length_digit: true, pad: "0").should eq "1234567890"
     end
 
     it "raises if checksum is wrong" do
       expect { BankTools::SE::OCR.to_number("1231") }.to raise_error(BankTools::SE::OCR::BadChecksum)
+    end
+
+    it "raises if length digit is wrong" do
+      expect { BankTools::SE::OCR.to_number("12369", length_digit: true) }.to raise_error(BankTools::SE::OCR::BadLengthDigit)
+    end
+
+    it "raises if padding doesn't match the given value" do
+      expect { BankTools::SE::OCR.to_number("1230", pad: "") }.not_to raise_error
+      expect { BankTools::SE::OCR.to_number("12302", pad: "0") }.not_to raise_error
+      expect { BankTools::SE::OCR.to_number("1230002", pad: "000") }.not_to raise_error
+
+      expect { BankTools::SE::OCR.to_number("12344", pad: "0") }.to raise_error(BankTools::SE::OCR::BadPadding)
     end
 
     it "raises if input is non-numeric" do
