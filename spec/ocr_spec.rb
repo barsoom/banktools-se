@@ -97,6 +97,11 @@ describe BankTools::SE::OCR do
       expect(BankTools::SE::OCR.find_all_in_string("45;64")).to eq [ "4564" ]
     end
 
+    it "handles OCR numbers both separated and split by '.'" do
+      expect(BankTools::SE::OCR.find_all_in_string("1230.4564")).to include "1230", "4564", "12304564"
+      expect(BankTools::SE::OCR.find_all_in_string("45.64")).to eq [ "4564" ]
+    end
+
     it "handles numbers smushed together" do
       # "Ref 1: 1230" with characters gone missing.
       expect(BankTools::SE::OCR.find_all_in_string("REF 11230")).to include "1230"
