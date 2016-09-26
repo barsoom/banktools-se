@@ -66,4 +66,24 @@ describe BankTools::SE::OCR do
       expect { BankTools::SE::OCR.to_number("garbage") }.to raise_error(BankTools::SE::OCR::MustBeNumeric)
     end
   end
+
+  describe ".find_all_in_string" do
+    it "detects only number sequences that are valid OCRs" do
+      expect(BankTools::SE::OCR.find_all_in_string("1230 1234 4564")).to eq [ "1230", "4564" ]
+    end
+
+    it "requires OCRs to comply with length_digit and pad options" do
+      string = "1230 4564 123067 456061"
+      expect(BankTools::SE::OCR.find_all_in_string(string)).to eq [ "1230", "4564", "123067", "456061" ]
+      expect(BankTools::SE::OCR.find_all_in_string(string, length_digit: true, pad: "0")).to eq [ "123067", "456061" ]
+    end
+
+    it "finds digits among any non-digit characters" do
+      expect(BankTools::SE::OCR.find_all_in_string("x1230x")).to eq [ "1230" ]
+    end
+
+    it "excludes duplicates" do
+      expect(BankTools::SE::OCR.find_all_in_string("1230 1230 4564")).to eq [ "1230", "4564" ]
+    end
+  end
 end

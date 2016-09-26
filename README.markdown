@@ -43,6 +43,11 @@ Inspired by [iulianu/iban-tools](https://github.com/iulianu/iban-tools). Please 
     BankTools::SE::OCR.to_number("123067", length_digit: true, pad: "0")  # => "123"
     BankTools::SE::OCR.to_number("1230", length_digit: true, pad: "0")  # Raises exception because there's no length digit or padding.
 
+    # This feature is intended to try to find all OCR numbers in a noisy bank statement string.
+    # By design it may find too many numbers (e.g. valid substrings of other numbers), so you should check results against actual outstanding invoices.
+    BankTools::SE::OCR.find_all_in_string("OCR1230 and ref4564 and 789")  # => [ "1230", "4564" ]
+    BankTools::SE::OCR.find_all_in_string("1230 and 123067", length_digit: true, pad: "0")  # => [ "123067" ]
+
     # Plusgiro
 
     valid_account = BankTools::SE::Plusgiro.new("2865434")

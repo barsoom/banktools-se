@@ -61,6 +61,17 @@ module BankTools
 
         number[0...-digits_to_chop]
       end
+
+      def self.find_all_in_string(string, length_digit: false, pad: "")
+        string.scan(/\d+/).select { |candidate|
+          begin
+            to_number(candidate, length_digit: length_digit, pad: pad)
+            true
+          rescue InvalidOCR
+            false
+          end
+        }.uniq
+      end
     end
   end
 end
