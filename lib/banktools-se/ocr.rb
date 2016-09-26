@@ -64,13 +64,14 @@ module BankTools
         ocr[0...-digits_to_chop]
       end
 
-      def self.find_all_in_string(string, length_digit: false, pad: "", min_length: 4)
+      # max_length is 19 because that's the longest allowed integer by default in a Postgres integer column with Ruby on Rails. So attempting some queries with longer OCRs may cause exceptions.
+      def self.find_all_in_string(string, length_digit: false, pad: "", min_length: 4, max_length: 19)
         expanded_string = string + " " + string.gsub("\n", "") + " " + string.gsub(";", "")
 
         numbers = expanded_string.scan(/\d+/)
 
         expanded_numbers = with_numbers_found_by_removing_prefix_and_postfix(numbers).
-          reject { |n| n.length < min_length }
+          reject { |n| n.length < min_length || n.length > max_length }
 
         expanded_numbers.select { |candidate|
           begin

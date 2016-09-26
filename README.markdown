@@ -45,10 +45,10 @@ Inspired by [iulianu/iban-tools](https://github.com/iulianu/iban-tools). Please 
 
     # This feature is intended to try to find all OCR numbers in a noisy bank statement string.
     # By design it may find too many numbers (e.g. valid substrings of other numbers), so you should check results against actual outstanding invoices.
-    # By default, it excludes OCRs shorter than 4 digits, but this limit can be specified per below.
+    # By default, it excludes OCRs shorter than 4 digits and longer than 19 digits, but this limit can be specified per below.
     BankTools::SE::OCR.find_all_in_string("OCR1230 and ref4564 and 7890")  # => [ "1230", "4564" ]
     BankTools::SE::OCR.find_all_in_string("1230 and 123067", length_digit: true, pad: "0")  # => [ "123067" ]
-    BankTools::SE::OCR.find_all_in_string("00 and 18", min_length: 2)  # => [ "00", "18" ]
+    BankTools::SE::OCR.find_all_in_string("00 and 18 and 1230", min_length: 2, max_length: 3)  # => [ "00", "18" ]
 
     # Plusgiro
 
