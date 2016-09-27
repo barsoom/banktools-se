@@ -5,19 +5,19 @@ describe BankTools::SE::OCR do
   # http://web.archive.org/web/20111216065227/http://www.bgc.se/upload/Gemensamt/Trycksaker/Manualer/BG6070.pdf section 5.2
   describe ".from_number" do
     it "adds a mod-10 check digit" do
-      BankTools::SE::OCR.from_number("123").should eq "1230"
+      expect(BankTools::SE::OCR.from_number("123")).to eq "1230"
     end
 
     it "handles integer input" do
-      BankTools::SE::OCR.from_number(123).should eq "1230"
+      expect(BankTools::SE::OCR.from_number(123)).to eq "1230"
     end
 
     it "can add an optional length digit" do
-      BankTools::SE::OCR.from_number("1234567890", length_digit: true).should eq "123456789023"
+      expect(BankTools::SE::OCR.from_number("1234567890", length_digit: true)).to eq "123456789023"
     end
 
     it "can pad the number" do
-      BankTools::SE::OCR.from_number("1234567890", length_digit: true, pad: "0").should eq "1234567890037"
+      expect(BankTools::SE::OCR.from_number("1234567890", length_digit: true, pad: "0")).to eq "1234567890037"
     end
 
     it "raises if resulting number is > 25 digits" do
@@ -31,19 +31,19 @@ describe BankTools::SE::OCR do
 
   describe ".to_number" do
     it "strips the mod-10 check digit" do
-      BankTools::SE::OCR.to_number("1230").should eq "123"
+      expect(BankTools::SE::OCR.to_number("1230")).to eq "123"
     end
 
     it "handles integer input" do
-      BankTools::SE::OCR.to_number(1230).should eq "123"
+      expect(BankTools::SE::OCR.to_number(1230)).to eq "123"
     end
 
     it "can strip an optional length digit" do
-      BankTools::SE::OCR.to_number("123456789023", length_digit: true).should eq "1234567890"
+      expect(BankTools::SE::OCR.to_number("123456789023", length_digit: true)).to eq "1234567890"
     end
 
     it "strips the given padding" do
-      BankTools::SE::OCR.to_number("1234567890037", length_digit: true, pad: "0").should eq "1234567890"
+      expect(BankTools::SE::OCR.to_number("1234567890037", length_digit: true, pad: "0")).to eq "1234567890"
     end
 
     it "raises if the given number is too short to be a valid OCR" do
