@@ -1,4 +1,4 @@
-# http://web.archive.org/web/20111216065227/http://www.bgc.se/upload/Gemensamt/Trycksaker/Manualer/BG6070.pdf section 5.2
+# https://www.bankgirot.se/globalassets/dokument/anvandarmanualer/bankgiroinbetalningar_anvandarmanual_sv_31okt2016.pdf section 5.2
 
 module BankTools
   module SE

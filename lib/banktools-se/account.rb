@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# http://web.archive.org/web/20130613010943/http://www.bgc.se/upload/Gemensamt/Trycksaker/Manualer/BG910.pdf
+# https://www.bankgirot.se/globalassets/dokument/anvandarmanualer/bankernaskontonummeruppbyggnad_anvandarmanual_sv.pdf
 
 require "banktools-se/account/clearing_number"
 

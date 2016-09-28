@@ -112,13 +112,14 @@ Or install it yourself as:
 
 Possible improvements to make:
 
-  * Luhn validation based on [BGC docs](http://web.archive.org/web/20130613010943/http://www.bgc.se/upload/Gemensamt/Trycksaker/Manualer/BG910.pdf).
+  * Luhn validation based on [these docs](https://www.bankgirot.se/globalassets/dokument/anvandarmanualer/bankernaskontonummeruppbyggnad_anvandarmanual_sv.pdf).
 
 
 ## Also see
 
 * [BankTools::DE (German)](https://github.com/barsoom/banktools-de)
 * [iban-tools](https://github.com/iulianu/iban-tools)
+* [Bankgirocentral documentation](https://www.bankgirot.se/kundservice/handbocker/)
 
 
 ## Credits and license
