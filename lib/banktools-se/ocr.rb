@@ -66,14 +66,28 @@ module BankTools
 
       # max_length is 19 because that's the longest allowed integer by default in a Postgres integer column with Ruby on Rails. So attempting some queries with longer OCRs may cause exceptions.
       def self.find_all_in_string(string, length_digit: false, pad: "", min_length: 4, max_length: 19)
-        expanded_string = [ string, *[ "\n", ";", "." ].map { |x| string.gsub(x, "") } ].join(" ")
+        # First, treat the input as one long string of digits.
+        # E.g. "1234 and 5678" becomes "12345678".
+        digit_string = string.gsub(/\D/, "")
+        digit_string_length = digit_string.length
 
-        numbers = expanded_string.scan(/\d+/)
+        candidates = []
 
-        expanded_numbers = with_numbers_found_by_removing_prefix_and_postfix(numbers).
-          reject { |n| n.length < min_length || n.length > max_length }
+        # Then find all substrings of min_length, and of all other lengths, up to max_length.
+        # So e.g. find all four-digit substrings ("1234", "2345", …), all five-digit substrings and so on.
 
-        expanded_numbers.select { |candidate|
+        0.upto(digit_string.length - min_length) do |start_pos|
+          min_end_pos = [ start_pos + min_length, digit_string_length ].min - 1
+          max_end_pos = [ start_pos + max_length, digit_string_length ].min - 1
+
+          min_end_pos.upto(max_end_pos) do |end_pos|
+            candidates << digit_string.slice(start_pos..end_pos)
+          end
+        end
+
+        # Finally, limit these substrings to ones that are actually valid OCRs.
+
+        candidates.select { |candidate|
           begin
             to_number(candidate, length_digit: length_digit, pad: pad)
             true

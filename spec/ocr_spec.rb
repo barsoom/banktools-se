@@ -74,32 +74,25 @@ describe BankTools::SE::OCR do
 
   describe ".find_all_in_string" do
     it "detects only number sequences that are valid OCRs" do
-      expect(BankTools::SE::OCR.find_all_in_string("1230 1234 4564")).to eq [ "1230", "4564" ]
+      expect(BankTools::SE::OCR.find_all_in_string("1230 1234 4564")).to include "1230", "4564"
+      expect(BankTools::SE::OCR.find_all_in_string("1230 1234 4564")).not_to include "1234"
     end
 
     it "requires OCRs to comply with the specified length_digit and pad options" do
       string = "1230 4564 123067 456061"
-      expect(BankTools::SE::OCR.find_all_in_string(string)).to eq [ "1230", "4564", "123067", "456061" ]
-      expect(BankTools::SE::OCR.find_all_in_string(string, length_digit: true, pad: "0")).to eq [ "123067", "456061" ]
+      expect(BankTools::SE::OCR.find_all_in_string(string)).to include "1230", "4564", "123067", "456061"
+
+      expect(BankTools::SE::OCR.find_all_in_string(string, length_digit: true, pad: "0")).to include "123067", "456061"
+      expect(BankTools::SE::OCR.find_all_in_string(string, length_digit: true, pad: "0")).not_to include "1230", "4564"
     end
 
     it "finds digits among any non-digit characters" do
       expect(BankTools::SE::OCR.find_all_in_string("x1230x")).to eq [ "1230" ]
     end
 
-    it "handles OCR numbers both separated and split by newlines" do
-      expect(BankTools::SE::OCR.find_all_in_string("1230\n4564")).to include "1230", "4564", "12304564"
-      expect(BankTools::SE::OCR.find_all_in_string("45\n64")).to eq [ "4564" ]
-    end
-
-    it "handles OCR numbers both separated and split by semicolons" do
-      expect(BankTools::SE::OCR.find_all_in_string("1230;4564")).to include "1230", "4564", "12304564"
-      expect(BankTools::SE::OCR.find_all_in_string("45;64")).to eq [ "4564" ]
-    end
-
-    it "handles OCR numbers both separated and split by '.'" do
-      expect(BankTools::SE::OCR.find_all_in_string("1230.4564")).to include "1230", "4564", "12304564"
-      expect(BankTools::SE::OCR.find_all_in_string("45.64")).to eq [ "4564" ]
+    it "handles OCR numbers both separated and split by non-digits" do
+      expect(BankTools::SE::OCR.find_all_in_string("12\n30\n4564")).to include "1230", "4564", "12304564"
+      expect(BankTools::SE::OCR.find_all_in_string("12;30.4564")).to include "1230", "4564", "12304564"
     end
 
     it "handles numbers smushed together" do
@@ -118,11 +111,13 @@ describe BankTools::SE::OCR do
     end
 
     it "lets you configure the accepted OCR min_length" do
-      expect(BankTools::SE::OCR.find_all_in_string("12304564")).to eq [ "12304564", "04564", "1230", "4564" ]
-      expect(BankTools::SE::OCR.find_all_in_string("12304564", min_length: 6)).to eq [ "12304564" ]
+      expect(BankTools::SE::OCR.find_all_in_string("12304564")).to include "1230", "12304564"
+
+      expect(BankTools::SE::OCR.find_all_in_string("12304564", min_length: 6)).to include "12304564"
+      expect(BankTools::SE::OCR.find_all_in_string("12304564", min_length: 6)).not_to include "1230"
 
       expect(BankTools::SE::OCR.find_all_in_string("1234")).to eq []
-      expect(BankTools::SE::OCR.find_all_in_string("1234", min_length: 2)).to eq [ "34" ]
+      expect(BankTools::SE::OCR.find_all_in_string("1234", min_length: 2)).to include "34"
     end
 
     it "lets you configure the accepted OCR max_length" do
@@ -138,7 +133,8 @@ describe BankTools::SE::OCR do
     end
 
     it "excludes duplicates" do
-      expect(BankTools::SE::OCR.find_all_in_string("1230 1230 4564")).to eq [ "1230", "4564" ]
+      results = BankTools::SE::OCR.find_all_in_string("1230 1230 4564")
+      expect(results.length).to eq results.uniq.length
     end
   end
 end
