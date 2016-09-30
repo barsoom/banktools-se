@@ -77,7 +77,7 @@ module BankTools
         # So e.g. find all four-digit substrings ("1234", "2345", …), all five-digit substrings and so on.
 
         0.upto(digit_string.length - min_length) do |start_pos|
-          min_end_pos = [ start_pos + min_length, digit_string_length ].min - 1
+          min_end_pos = start_pos + min_length - 1
           max_end_pos = [ start_pos + max_length, digit_string_length ].min - 1
 
           min_end_pos.upto(max_end_pos) do |end_pos|
