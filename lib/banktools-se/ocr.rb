@@ -85,6 +85,8 @@ module BankTools
           end
         end
 
+        candidates.uniq!
+
         # Finally, limit these substrings to ones that are actually valid OCRs.
 
         candidates.select { |candidate|
@@ -94,7 +96,7 @@ module BankTools
           rescue InvalidOCR
             false
           end
-        }.uniq
+        }
       end
 
       private
