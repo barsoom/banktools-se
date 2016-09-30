@@ -73,7 +73,7 @@ module BankTools
 
         candidates = []
 
-        # Then find all substrings of min_length, and of all other lengths, up to max_length.
+        # Then find all substrings ("n-grams") of min_length, and of all other lengths, up to max_length.
         # So e.g. find all four-digit substrings ("1234", "2345", …), all five-digit substrings and so on.
 
         0.upto(digit_string.length - min_length) do |start_pos|
