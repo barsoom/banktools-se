@@ -68,6 +68,7 @@ module BankTools
       def self.find_all_in_string(string, length_digit: false, pad: "", min_length: 4, max_length: 19)
         # First, treat the input as one long string of digits.
         # E.g. "1234 and 5678" becomes "12345678".
+
         digit_string = string.gsub(/\D/, "")
         digit_string_length = digit_string.length
 
@@ -84,6 +85,8 @@ module BankTools
             candidates << digit_string.slice(start_pos..end_pos)
           end
         end
+
+        # Get rid of any duplicates.
 
         candidates.uniq!
 
