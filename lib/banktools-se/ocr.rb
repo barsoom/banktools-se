@@ -70,12 +70,12 @@ module BankTools
         # E.g. "1234 and 5678" becomes "12345678".
 
         digit_string = string.gsub(/\D/, "")
-        digit_string_length = digit_string.length
-
-        candidates = []
 
         # Then find all substrings ("n-grams") of min_length, and of all other lengths, up to max_length.
         # So e.g. find all four-digit substrings ("1234", "2345", …), all five-digit substrings and so on.
+
+        digit_string_length = digit_string.length
+        candidates = []
 
         0.upto(digit_string.length - min_length) do |start_pos|
           min_end_pos = start_pos + min_length - 1
