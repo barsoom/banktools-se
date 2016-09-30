@@ -98,20 +98,6 @@ module BankTools
           end
         }
       end
-
-      private
-
-      private_class_method \
-        def self.with_numbers_found_by_removing_prefix_and_postfix(numbers)
-          numbers + numbers.flat_map { |number|
-            0.upto(number.size).flat_map { |i|
-              [
-                number[0...i],
-                number[i...number.size],
-              ]
-            }
-          }
-      end
     end
   end
 end
