@@ -88,7 +88,7 @@ module BankTools
 
         # Get rid of any duplicates.
 
-        candidates.uniq!
+        candidates = candidates.uniq
 
         # Finally, limit these substrings to ones that are actually valid OCRs.
 
