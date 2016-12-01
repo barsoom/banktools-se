@@ -118,7 +118,7 @@ Possible improvements to make:
 ## Also see
 
 * [Bankgirocentral documentation](https://www.bankgirot.se/kundservice/handbocker/)
-* [Our other BankTools](https://github.com/barsoom?query=banktools)
+* [Our other BankTools](https://github.com/barsoom?q=banktools)
 * [iban-tools](https://github.com/iulianu/iban-tools)
 
 
