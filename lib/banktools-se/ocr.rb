@@ -64,8 +64,8 @@ module BankTools
         ocr[0...-digits_to_chop]
       end
 
-      # max_length is 19 because that's the longest allowed integer by default in a Postgres integer column with Ruby on Rails. So attempting some queries with longer OCRs may cause exceptions.
-      def self.find_all_in_string(string, length_digit: false, pad: "", min_length: 4, max_length: 19)
+      # max_length is 18, because the biggest allowed integer by default in a Postgres integer column ("bigint") is 19 digits long, as is the next (disallowed) number. Attempting some queries with longer OCRs may cause Ruby on Rails exceptions.
+      def self.find_all_in_string(string, length_digit: false, pad: "", min_length: 4, max_length: 18)
         # First, treat the input as one long string of digits.
         # E.g. "1234 and 5678" becomes "12345678".
 

@@ -121,15 +121,17 @@ describe BankTools::SE::OCR do
     end
 
     it "lets you configure the accepted OCR max_length" do
-      ocr_length_19 = "1234567890123456785"
-      ocr_length_20 = "12345678901234567894"
-      string = "#{ocr_length_19} #{ocr_length_20}"
+      # Add a check digit to the input.
+      ocr_length_18 = BankTools::SE::OCR.from_number("12345678901234567")
+      ocr_length_19 = BankTools::SE::OCR.from_number("123456789012345678")
 
-      # Default max_length is 19.
-      expect(BankTools::SE::OCR.find_all_in_string(string)).to include ocr_length_19
-      expect(BankTools::SE::OCR.find_all_in_string(string)).not_to include ocr_length_20
+      string = "#{ocr_length_18} #{ocr_length_19}"
 
-      expect(BankTools::SE::OCR.find_all_in_string(string, max_length: 20)).to include ocr_length_19, ocr_length_20
+      # Default max_length is 18.
+      expect(BankTools::SE::OCR.find_all_in_string(string)).to include ocr_length_18
+      expect(BankTools::SE::OCR.find_all_in_string(string)).not_to include ocr_length_19
+
+      expect(BankTools::SE::OCR.find_all_in_string(string, max_length: 19)).to include ocr_length_18, ocr_length_19
     end
 
     it "excludes duplicates" do
