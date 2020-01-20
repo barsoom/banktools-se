@@ -10,8 +10,6 @@ Gem::Specification.new do |s|
   s.homepage    = ""
   s.summary     = %q{Validate and normalize Swedish bank account numbers, plusgiro and bankgiro.}
 
-  s.rubyforge_project = "banktools-se"
-
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
