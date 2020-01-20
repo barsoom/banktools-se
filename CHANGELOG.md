@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.1
+
+- Fix deprecation error: "NOTE: Gem::Specification#rubyforge_project= is deprecated with no replacement. It will be removed on or after 2019-12-01."
+
 ## 3.0.0
 
 - Change `BankTools::SE::OCR.find_all_in_string` default `max_length` from 19 to 18 to avoid out of range errors with Active Record.
