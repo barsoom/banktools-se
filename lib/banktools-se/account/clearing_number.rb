@@ -11,11 +11,11 @@ module BankTools
           2300..2399 => { name: "Ålandsbanken" },
           2400..2499 => { name: "Danske Bank" },
           3000..3299 => { name: "Nordea" },
-          3300..3300 => { name: "Nordea", serial_number_length: 10, luhn_for_serial: true },  # Personkonto.
+          3300..3300 => { name: "Nordea", serial_number_length: 10, luhn_for_serial: true }, # Personkonto.
           3301..3399 => { name: "Nordea" },
           3400..3409 => { name: "Länsförsäkringar Bank" },
           3410..3781 => { name: "Nordea" },
-          3782..3782 => { name: "Nordea", serial_number_length: 10, luhn_for_serial: true },  # Personkonto.
+          3782..3782 => { name: "Nordea", serial_number_length: 10, luhn_for_serial: true }, # Personkonto.
           3783..4999 => { name: "Nordea" },
           5000..5999 => { name: "SEB" },
           6000..6999 => { name: "Handelsbanken", serial_number_length: 8..9 },
@@ -45,6 +45,19 @@ module BankTools
           9500..9549 => { name: "Nordea/Plusgirot", serial_number_length: 1..10 },
           9550..9569 => { name: "Avanza Bank" },
           9570..9579 => { name: "Sparbanken Syd", serial_number_length: 10, zerofill: true },
+          9630..9639 => { name: "Lån og Spar Bank Sverige" },
+          9640..9649 => { name: "Nordax Bank AB" },
+          9650..9659 => { name: "MedMera Bank" },
+          9660..9669 => { name: "Svea Bank" },
+          9670..9679 => { name: "JAK Medlemsbank" },
+          9680..9689 => { name: "Bluestep Finance" },
+          9690..9699 => { name: "Folkia" },
+          9700..9709 => { name: "Ekobanken" },
+          9720..9729 => { name: "Netfonds Bank (ub)" },
+          9750..9759 => { name: "Northmill Bank" },
+          9770..9779 => { name: "FTCS" },
+          9780..9789 => { name: "Klarna Bank" },
+          9955..9955 => { name: "Kommuninvest" },
           9960..9969 => { name: "Nordea/Plusgirot", serial_number_length: 1..10 },
         }
       end
