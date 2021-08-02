@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 3.1.0
 
 - Add more banks to the range in `BankTools::SE::Account::ClearingNumber`. See [#7]. Thanks, Milen Dimitrov!
 
