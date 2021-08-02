@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Add more banks to the range in `BankTools::SE::Account::ClearingNumber`. See [#7].
+- Add more banks to the range in `BankTools::SE::Account::ClearingNumber`. See [#7]. Thanks, Milen Dimitrov!
 
 ## 3.0.1
 
