@@ -1,5 +1,7 @@
 # Swedish bank tools
 
+[![Ruby CI](https://github.com/barsoom/banktools-se/actions/workflows/ci.yml/badge.svg)](https://github.com/barsoom/banktools-se/actions/workflows/ci.yml)
+
 Ruby gem to validate, normalize/prettify and to some extent interpret
 
   * Swedish bank account numbers
