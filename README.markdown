@@ -1,7 +1,5 @@
 # Swedish bank tools
 
-[![Build Status](https://secure.travis-ci.org/barsoom/banktools-se.svg)](http://travis-ci.org/barsoom/banktools-se)
-
 Ruby gem to validate, normalize/prettify and to some extent interpret
 
   * Swedish bank account numbers
