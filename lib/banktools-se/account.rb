@@ -50,8 +50,8 @@ module BankTools
 
       def clearing_number
         [
-          digits[0,4],
-          checksum_for_clearing? ? digits[4,1] : nil
+          digits[0, 4],
+          checksum_for_clearing? ? digits[4, 1] : nil
         ].compact.join("-")
       end
 
@@ -72,7 +72,7 @@ module BankTools
       end
 
       def bank_data
-        number = digits[0,4].to_i
+        number = digits[0, 4].to_i
         _, found_data = CLEARING_NUMBER_MAP.find { |interval, data| interval.include?(number) }
         found_data || {}
       end
