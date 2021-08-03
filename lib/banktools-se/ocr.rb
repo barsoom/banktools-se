@@ -20,6 +20,7 @@ module BankTools
         pad = pad.to_s
 
         raise MustBeNumeric unless number.match(/\A\d+\z/)
+
         # Padding isn't something BGC specifies, but we needed it to support a legacy scheme.
         number += pad
         # Adding 2: 1 length digit, 1 check digit.
