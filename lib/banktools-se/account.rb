@@ -51,7 +51,7 @@ module BankTools
       def clearing_number
         [
           digits[0, 4],
-          checksum_for_clearing? ? digits[4, 1] : nil
+          checksum_for_clearing? ? digits[4, 1] : nil,
         ].compact.join("-")
       end
 
