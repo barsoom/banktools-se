@@ -90,7 +90,7 @@ module BankTools
           Array(serial_number_length).last +
             (checksum_for_clearing? ? 1 : 0)
         else
-          1/0.0  # Infinity.
+          1 / 0.0  # Infinity.
         end
       end
 
