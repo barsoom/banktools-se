@@ -17,7 +17,7 @@ describe BankTools::SE::Account do
 
     it "should be false with errors" do
       account = BankTools::SE::Account.new("foo")
-      allow(account).to receive(:errors).and_return([:error])
+      allow(account).to receive(:errors).and_return([ :error ])
       expect(account).not_to be_valid
     end
   end
