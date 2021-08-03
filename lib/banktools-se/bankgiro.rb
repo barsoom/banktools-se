@@ -38,7 +38,7 @@ module BankTools
       private
 
       def digits
-        number.to_s.gsub(/\D/, '')
+        number.to_s.gsub(/\D/, "")
       end
 
     end

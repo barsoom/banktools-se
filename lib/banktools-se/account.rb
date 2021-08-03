@@ -107,7 +107,7 @@ module BankTools
       end
 
       def digits
-        number.to_s.gsub(/\D/, '')
+        number.to_s.gsub(/\D/, "")
       end
 
       def zerofill?
