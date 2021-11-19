@@ -147,7 +147,7 @@ describe BankTools::SE::Account do
 
   describe "#normalize" do
     it "should normalize to clearing number dash serial number" do
-      account = expect(BankTools::SE::Account.new("11000000007").normalize).to eq("1100-0000007")
+      expect(BankTools::SE::Account.new("11000000007").normalize).to eq("1100-0000007")
     end
 
     it "should keep any Swedbank/Sparbanker clearing checksum" do
@@ -155,7 +155,7 @@ describe BankTools::SE::Account do
     end
 
     it "should not attempt to normalize invalid numbers" do
-      account = expect(BankTools::SE::Account.new(" 1-2-3 ").normalize).to eq(" 1-2-3 ")
+      expect(BankTools::SE::Account.new(" 1-2-3 ").normalize).to eq(" 1-2-3 ")
     end
 
     it "should prepend zeroes to the serial number if necessary" do
