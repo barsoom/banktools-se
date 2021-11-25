@@ -5,5 +5,9 @@ gemspec
 
 group :development do
   gem "barsoom_utils"
+  gem "guard"
+  gem "guard-rspec"
+  gem "rake"
+  gem "rspec"
   gem "rubocop"
 end
