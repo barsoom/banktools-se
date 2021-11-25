@@ -3,7 +3,7 @@ source "https://rubygems.org"
 # Specify your gem's dependencies in bank-tools-se.gemspec
 gemspec
 
-group :development do
+group :development, :test do
   gem "barsoom_utils"
   gem "guard"
   gem "guard-rspec"
