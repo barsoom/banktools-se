@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 3.2.0
 
 - Add Account#normalize keyword arguments `digits_only`, `clearing_checksum`. [#11](https://github.com/barsoom/banktools-se/pull/11)
 
