@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Add Account#normalize keyword arguments `digits_only`, `clearing_checksum`. [#11](https://github.com/barsoom/banktools-se/pull/11)
+
 ## 3.1.1
 
 - Require MFA for privileged Rubygems actions.
