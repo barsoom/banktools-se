@@ -1,7 +1,7 @@
 require "spec_helper"
 require "banktools-se"
 
-describe BankTools::SE::OCR do
+RSpec.describe BankTools::SE::OCR do
   # https://www.bankgirot.se/globalassets/dokument/anvandarmanualer/bankgiroinbetalningar_anvandarmanual_sv_31okt2016.pdf section 5.2
   describe ".from_number" do
     it "adds a mod-10 check digit" do

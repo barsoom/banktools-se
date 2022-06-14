@@ -1,7 +1,7 @@
 require "spec_helper"
 require "banktools-se/utils"
 
-describe BankTools::SE::Utils, "valid_luhn?" do
+RSpec.describe BankTools::SE::Utils, "valid_luhn?" do
 
   [
     "00",

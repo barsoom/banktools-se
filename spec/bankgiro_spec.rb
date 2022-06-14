@@ -1,7 +1,7 @@
 require "spec_helper"
 require "banktools-se"
 
-describe BankTools::SE::Bankgiro do
+RSpec.describe BankTools::SE::Bankgiro do
   it "should initialize" do
     expect(BankTools::SE::Bankgiro.new("foo")).to be_a(BankTools::SE::Bankgiro)
   end
