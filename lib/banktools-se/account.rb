@@ -36,9 +36,16 @@ module BankTools
         errors
       end
 
-      def normalize
+      def normalize(digits_only: false, clearing_checksum: true)
         if valid?
-          [ clearing_number, serial_number ].join("-")
+          clearing_number_part =
+            if clearing_checksum
+              clearing_number
+            else
+              digits[0, 4]
+            end
+          result = [ clearing_number_part, serial_number ].join("-")
+          digits_only ? result.gsub(/\D/, "") : result
         else
           number
         end
