@@ -1,4 +1,3 @@
-require "spec_helper"
 require "banktools-se"
 
 RSpec.describe BankTools::SE::Plusgiro do

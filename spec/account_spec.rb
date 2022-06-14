@@ -1,6 +1,5 @@
 # encoding: utf-8
 
-require "spec_helper"
 require "banktools-se"
 
 RSpec.describe BankTools::SE::Account do
