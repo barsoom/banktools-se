@@ -162,4 +162,23 @@ RSpec.describe BankTools::SE::Account do
       expect(BankTools::SE::Account.new("8000-2-8000000003").normalize).to eq("8000-2-8000000003")
     end
   end
+
+  describe "#normalize_for_apis" do
+    it "normalizes to clearing number then serial number" do
+      expect(BankTools::SE::Account.new("1100 0000007").normalize_for_apis).to eq("11000000007")
+    end
+
+    it "drops any Swedbank/Sparbanker clearing checksum" do
+      expect(BankTools::SE::Account.new("8000-2-0000000000").normalize_for_apis).to eq("80000000000000")
+    end
+
+    it "keeps any invalid numbers" do
+      expect(BankTools::SE::Account.new(" 1-2-3 ").normalize_for_apis).to eq(" 1-2-3 ")
+    end
+
+    it "prepends zeroes to the serial number if necessary" do
+      expect(BankTools::SE::Account.new("8000-2-80000003").normalize_for_apis).to   eq("80000080000003")
+      expect(BankTools::SE::Account.new("8000-2-8000000003").normalize_for_apis).to eq("80008000000003")
+    end
+  end
 end

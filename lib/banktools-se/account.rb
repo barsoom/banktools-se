@@ -44,6 +44,14 @@ module BankTools
         end
       end
 
+      def normalize_for_apis
+        if valid?
+          [ digits[0, 4], serial_number ].join("")
+        else
+          number
+        end
+      end
+
       def bank
         bank_data[:name]
       end
