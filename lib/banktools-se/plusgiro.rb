@@ -29,7 +29,7 @@ module BankTools
       def normalize
         if valid?
           pre, pairs, post = digits.split(/(\d{2}*)(\d)$/)
-          pairs = pairs.split(/(\d\d)/).reject { |x| x.empty? }
+          pairs = pairs.split(/(\d\d)/).reject(&:empty?)
           [ pre, pairs.join(" "), "-", post ].join
         else
           number
