@@ -14,11 +14,11 @@ jobs:
       engine: cruby
 
   test:
+    needs: ruby-versions
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        needs: ruby-versions
         ruby-version: ${{ fromJson(needs.ruby-versions.outputs.versions) }}
 
     steps:
