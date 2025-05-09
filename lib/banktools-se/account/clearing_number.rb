@@ -53,6 +53,7 @@ module BankTools
           9680..9689 => { name: "Bluestep Finance" },
           9690..9699 => { name: "Folkia" },
           9700..9709 => { name: "Ekobanken" },
+          9710..9719 => { name: "Lunar Bank" },
           9720..9729 => { name: "Netfonds Bank (ub)" },
           9750..9759 => { name: "Northmill Bank" },
           9770..9779 => { name: "FTCS" },
