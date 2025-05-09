@@ -64,7 +64,7 @@ RSpec.describe BankTools::SE::Account do
       "9550-0000000",       # Avanza Bank.
       "9570-0000000000",    # Sparbanken Syd.
       "9960-00",            # Nordea/Plusgirot.
-
+      "9710-0000000",       # Lunar Bank.
     ].each do |number|
       it "should be empty for a valid number like #{number}" do
         expect(BankTools::SE::Account.new(number).errors).to eq([])
@@ -112,6 +112,7 @@ RSpec.describe BankTools::SE::Account do
       expect(BankTools::SE::Account.new("11550000001").bank).to eq("Nordea")
       expect(BankTools::SE::Account.new("11990000009").bank).to eq("Nordea")
       expect(BankTools::SE::Account.new("12000000005").bank).to eq("Danske Bank")
+      expect(BankTools::SE::Account.new("97100000000").bank).to eq("Lunar Bank")
     end
 
     it "should return nil for unknown clearing numbers" do
