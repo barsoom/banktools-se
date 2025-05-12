@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.3.0
+
+- Add Lunar Bank clearing number range. [#14](https://github.com/barsoom/banktools-se/pull/14). Thanks, @andyglim!
+
 ## 3.2.0
 
 - Add Account#normalize keyword arguments `digits_only`, `clearing_checksum`. [#11](https://github.com/barsoom/banktools-se/pull/11)
