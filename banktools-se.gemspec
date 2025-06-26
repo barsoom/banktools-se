@@ -13,5 +13,9 @@ Gem::Specification.new do |s|
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.require_paths = [ "lib" ]
-  s.metadata      = { "rubygems_mfa_required" => "true" }
+  s.metadata      = {
+    "rubygems_mfa_required" => "true",
+    "source_code_uri" => "https://github.com/barsoom/banktools-se",
+    "changelog_uri" => "https://github.com/barsoom/banktools-se/blob/v#{BankTools::SE::VERSION}/CHANGELOG.md",
+  }
 end
