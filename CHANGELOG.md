@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.3.2
+
+- Revert erroneous changes introduced in 3.3.1
+
+## 3.3.1
+
+- Do not use.
+
 ## 3.3.0
 
 - Add Lunar Bank clearing number range. [#14](https://github.com/barsoom/banktools-se/pull/14). Thanks, @andyglim!
