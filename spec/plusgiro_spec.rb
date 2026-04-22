@@ -26,7 +26,6 @@ RSpec.describe BankTools::SE::Plusgiro do
     [
       "28 65 43-4",  # IKEA
       "410 54 68-5",  # IKEA
-      "421 880 87-25", # Göteborg Dödsbotjänster AB
       "4-2",  # Sveriges riksbank
     ].each do |number|
       it "should be empty for a valid number like #{number}" do
@@ -41,8 +40,8 @@ RSpec.describe BankTools::SE::Plusgiro do
       expect(BankTools::SE::Plusgiro.new("1---------").errors).to include(BankTools::SE::Errors::TOO_SHORT)
     end
 
-    it "should include :too_long for numbers longer than 10 digits" do
-      expect(BankTools::SE::Plusgiro.new("410 54 68-51 21").errors).to include(BankTools::SE::Errors::TOO_LONG)
+    it "should include :too_long for numbers longer than 8 digits" do
+      expect(BankTools::SE::Plusgiro.new("410 54-51 21").errors).to include(BankTools::SE::Errors::TOO_LONG)
     end
 
     it "should include :invalid_characters for numbers with other character than digits, spaces and dashes" do

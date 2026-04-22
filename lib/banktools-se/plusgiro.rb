@@ -5,7 +5,7 @@ module BankTools
       # Could sadly not find anything more authoritative than
       #   http://pellesoft.se/communicate/forum/view.aspx?msgid=267449&forumid=63&sum=0
       #   https://www.nordea.se/foretag/kundservice/fragor-och-svar-konton.html#faq=Kontouppgifter+432454
-      MAX_LENGTH = 10
+      MAX_LENGTH = 8
       MIN_LENGTH = 2
 
       attr_reader :number
