@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.4.0
+
+- Zerofill Handelsbanken serial numbers to 9 digits in `Account#serial_number` and `Account#normalize`. 8-digit serial numbers are still valid; 7 or fewer are still too short.
+- A Swedbank/Sparbanken account with no serial number digits at all (e.g. "8000-2") is now too short, rather than zerofilled to all zeroes.
+
 ## 3.3.2
 
 - Revert erroneous changes introduced in 3.3.1

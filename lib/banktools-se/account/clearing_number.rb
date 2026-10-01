@@ -18,10 +18,11 @@ module BankTools
           3782..3782 => { name: "Nordea", serial_number_length: 10, luhn_for_serial: true }, # Personkonto.
           3783..4999 => { name: "Nordea" },
           5000..5999 => { name: "SEB" },
-          6000..6999 => { name: "Handelsbanken", serial_number_length: 8..9 },
+          # Can be 8 or 9 chars but must be zero-filled to 9.
+          6000..6999 => { name: "Handelsbanken", serial_number_length: 8..9, zerofill: true },
           7000..7999 => { name: "Swedbank" },
-          # Can be fewer chars but must be zero-filled, so let's call it 10.
-          8000..8999 => { name: "Swedbank", serial_number_length: 10, checksum_for_clearing: true, zerofill: true },
+          # Can be fewer chars but must be zero-filled to 10.
+          8000..8999 => { name: "Swedbank", serial_number_length: 1..10, checksum_for_clearing: true, zerofill: true },
           9020..9029 => { name: "Länsförsäkringar Bank" },
           9040..9049 => { name: "Citibank" },
           9060..9069 => { name: "Länsförsäkringar Bank" },
@@ -38,13 +39,13 @@ module BankTools
           9260..9269 => { name: "Den Norske Bank" },
           9270..9279 => { name: "ICA Banken" },
           9280..9289 => { name: "Resurs Bank" },
-          9300..9349 => { name: "Sparbanken Öresund", serial_number_length: 10, zerofill: true },
+          9300..9349 => { name: "Sparbanken Öresund", serial_number_length: 1..10, zerofill: true },
           9400..9449 => { name: "Forex Bank" },
           9460..9469 => { name: "GE Money Bank" },
           9470..9479 => { name: "Fortis Bank" },
           9500..9549 => { name: "Nordea/Plusgirot", serial_number_length: 1..10 },
           9550..9569 => { name: "Avanza Bank" },
-          9570..9579 => { name: "Sparbanken Syd", serial_number_length: 10, zerofill: true },
+          9570..9579 => { name: "Sparbanken Syd", serial_number_length: 1..10, zerofill: true },
           9630..9639 => { name: "Lån og Spar Bank Sverige" },
           9640..9649 => { name: "Nordax Bank AB" },
           9650..9659 => { name: "MedMera Bank" },
