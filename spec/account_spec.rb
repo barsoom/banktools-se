@@ -81,6 +81,14 @@ RSpec.describe BankTools::SE::Account do
       expect(BankTools::SE::Account.new("9570-2-00000000").errors).not_to include(BankTools::SE::Errors::TOO_SHORT)
     end
 
+    it "should include :too_short for Handelsbanken numbers shorter than 8 digits, even though they are zerofilled" do
+      expect(BankTools::SE::Account.new("6000-1234567").errors).to include(BankTools::SE::Errors::TOO_SHORT)
+    end
+
+    it "should include :too_long for Handelsbanken numbers longer than 9 digits" do
+      expect(BankTools::SE::Account.new("6000-1234567890").errors).to include(BankTools::SE::Errors::TOO_LONG)
+    end
+
     it "should include :too_long for numbers longer than the bank allows" do
       expect(BankTools::SE::Account.new("1100000000007").errors).to include(BankTools::SE::Errors::TOO_LONG)
     end
@@ -139,6 +147,10 @@ RSpec.describe BankTools::SE::Account do
       expect(BankTools::SE::Account.new("8000-2-0000000000").serial_number).to eq("0000000000")
     end
 
+    it "should zerofill Handelsbanken serial numbers to 9 digits" do
+      expect(BankTools::SE::Account.new("6000-12345678").serial_number).to eq("012345678")
+    end
+
     it "should be the empty string if there aren't enough numbers" do
       expect(BankTools::SE::Account.new("12").serial_number).to eq("")
     end
@@ -152,6 +164,11 @@ RSpec.describe BankTools::SE::Account do
 
     it "should keep any Swedbank/Sparbanker clearing checksum" do
       expect(BankTools::SE::Account.new("8000-2-0000000000").normalize).to eq("8000-2-0000000000")
+    end
+
+    it "should zerofill Handelsbanken serial numbers to 9 digits" do
+      expect(BankTools::SE::Account.new("6000-12345678").normalize).to eq("6000-012345678")
+      expect(BankTools::SE::Account.new("6000-123456789").normalize).to eq("6000-123456789")
     end
 
     it "should not attempt to normalize invalid numbers" do

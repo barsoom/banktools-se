@@ -23,8 +23,9 @@ module BankTools
       def errors
         errors = []
 
-        errors << Errors::TOO_SHORT if serial_number.length < min_length
-        errors << Errors::TOO_LONG if serial_number.length > max_length
+        # Validate the serial number as given, before any zero-filling.
+        errors << Errors::TOO_SHORT if raw_serial_number.length < min_length
+        errors << Errors::TOO_LONG if raw_serial_number.length > max_length
         errors << Errors::INVALID_CHARACTERS if number.to_s.match(/[^\d -]/)
 
         if luhn_for_serial?
@@ -63,16 +64,18 @@ module BankTools
       end
 
       def serial_number
-        number = digits.slice(clearing_number_length..-1) || ""
-
         if zerofill?
-          number.rjust(serial_number_length, "0")
+          raw_serial_number.rjust(Array(serial_number_length).last, "0")
         else
-          number
+          raw_serial_number
         end
       end
 
       private
+
+      def raw_serial_number
+        digits.slice(clearing_number_length..-1) || ""
+      end
 
       def clearing_number_length
         checksum_for_clearing? ? 5 : 4
