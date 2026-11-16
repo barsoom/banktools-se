@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "banktools-se/version"
 require "banktools-se/errors"
 require "banktools-se/utils"

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # https://www.bankgirot.se/globalassets/dokument/anvandarmanualer/bankgiroinbetalningar_anvandarmanual_sv_31okt2016.pdf section 5.2
 
 module BankTools

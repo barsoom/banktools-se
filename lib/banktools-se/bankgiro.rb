@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # http://sv.wikipedia.org/wiki/Bankgirot#Bankgironummer
 module BankTools
   module SE
