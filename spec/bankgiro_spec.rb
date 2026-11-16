@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "banktools-se"
 
 RSpec.describe BankTools::SE::Bankgiro do

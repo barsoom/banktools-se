@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "banktools-se/utils"
 
 RSpec.describe BankTools::SE::Utils, "valid_luhn?" do

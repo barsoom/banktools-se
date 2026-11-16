@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Add `# frozen_string_literal: true` to all Ruby files. No behaviour change.
+
 ## 3.4.0
 
 - Zerofill Handelsbanken serial numbers to 9 digits in `Account#serial_number` and `Account#normalize`. 8-digit serial numbers are still valid; 7 or fewer are still too short.
